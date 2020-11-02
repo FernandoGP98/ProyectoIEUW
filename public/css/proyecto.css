@@ -1,0 +1,17 @@
+
+
+.slick-prev {
+    left: 60px;
+
+    z-index: 1;
+}
+
+.slick-next {
+    right: 60px;
+}
+
+.SliderReseñas{
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+}

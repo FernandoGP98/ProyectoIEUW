@@ -10,71 +10,144 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <<link href="{{ asset('css/proyecto.css') }}" rel="stylesheet">>
 </head>
-<body>
+<body style="background-color: #212121">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+        <nav class="mt-0 mb-0 navbar navbar-expand-md navbar-light bg-white shadow-sm justify-content-md-center align-items-start">
+            <div class="d-flex order-0">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <a class="navbar-brand navbar-collapse collapse navbarSupportedContent" href="{{ url('/') }}">
+                    <img src="https://cdn.atomix.vg/wp-content/uploads/2013/05/Marco-New-Logo-Home.jpg" alt="" srcset="">
+                </a>
+                <form class="form-inline my-2 my-lg-0 mx-1" method="post" action="/busqueda">
+                    @csrf
+                    <input class="form-control mr-sm-2" id="search-box" name="search" type="search"
+                        placeholder="Busca en Atomix" aria-label="Search">
+                </form>
+            </div>
+            <div class="collapse navbar-collapse position-absolute order-1 navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav justify-content-center mx-auto" style="text-align: right">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/noticias') }}">Noticias</a>
+                    </li>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
+                </ul>
+            </div>
+            <div class="navbar-collapse collapse order-2 dual-collapse2">
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="pb-4">
             @yield('content')
         </main>
+
+        <!-- Footer -->
+    <footer style="background-color:white;" class="page-footer font-small blue pt-4">
+
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-6 mt-md-0 mt-3">
+
+                    <!-- Content -->
+                    <h5 class="text-uppercase">Atomix</h5>
+                    <div class="">© 2018 Copyright:
+                        <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+                    </div>
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <div class="mb-3">
+                        <h5 class="">Vistanos en</h5>
+                        <img class="mr-3" src="/images/facebook.png" width="40px" height="auto" alt="">
+                        <img class="mr-3" src="/images/youtube.png" width="40px" height="auto" alt="">
+                        <img src="/images/twitter.png" width="40px" height="auto" alt="">
+                    </div>
+                    <div>Icons made by
+                        <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik
+                        </a> from
+                        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+
+    </footer>
+    <!-- Footer -->
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $('.SliderReseñas').slick({
+            speed: 700,
+            autoplay:false,
+            slidesToShow: 7,
+            slidesToScroll: 7,
+          });
+        });
+      </script>
 </body>
 </html>
