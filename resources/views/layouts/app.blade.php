@@ -10,18 +10,18 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-
-
+    <script src="https://kit.fontawesome.com/0de3fe663e.js" crossorigin="anonymous" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <<link href="{{ asset('css/proyecto.css') }}" rel="stylesheet">>
+    <link href="{{ asset('css/proyecto.css') }}" rel="stylesheet">
 </head>
 <body style="background-color: #212121">
     <div id="app">
@@ -31,34 +31,49 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="navbar-brand navbar-collapse collapse navbarSupportedContent" href="{{ url('/') }}">
-                    <img src="https://cdn.atomix.vg/wp-content/uploads/2013/05/Marco-New-Logo-Home.jpg" alt="" srcset="">
+                    <img src="/images/logo.png" alt="" srcset="" width="115px" height="auto">
                 </a>
                 <form class="form-inline my-2 my-lg-0 mx-1" method="post" action="/busqueda">
                     @csrf
-                    <input class="form-control mr-sm-2" id="search-box" name="search" type="search"
+                    <input class="form-control mr-sm-2" style="border-radius: 20px;" id="search-box" name="search" type="search"
                         placeholder="Busca en Atomix" aria-label="Search">
+                        <i class="btn fas fa-search"></i>
                 </form>
             </div>
-            <div class="collapse navbar-collapse position-absolute order-1 navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
+            <div class="mt-2 collapse navbar-collapse position-absolute order-1 navbarSupportedContent">
+                <!-- Middle Side Of Navbar -->
                 <ul class="navbar-nav justify-content-center mx-auto" style="text-align: right">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/noticias') }}">Noticias</a>
+                        <a class="nav-link" href="{{ url('/') }}"><i class="fas fa-home"></i></a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/noticias') }}">NOTICIAS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/noticias') }}">RESEÑAS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/noticias') }}">NINTENDO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/noticias') }}">SONY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/noticias') }}">XBOX</a>
+                    </li>
                 </ul>
             </div>
-            <div class="navbar-collapse collapse order-2 dual-collapse2">
+            <div class="mt-2 navbar-collapse collapse order-2 dual-collapse2">
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link btn" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link btn" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
                     @else
@@ -84,7 +99,7 @@
             </div>
         </nav>
 
-        <main class="pb-4">
+        <main class="py-4">
             @yield('content')
         </main>
 

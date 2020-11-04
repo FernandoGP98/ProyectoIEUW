@@ -1,5 +1,31 @@
+@font-face {
+    font-family: Metropolis;
+    src: url('/fonts/Metropolis-Regular.otf');
+}
+@font-face {
+    font-family: MetropolisBold;
+    src: url('/fonts/Metropolis-ExtraBold.otf');
+}
+@font-face {
+    font-family: MetropolisThin;
+    src: url('/fonts/Metropolis-Thin.otf');
+}
 
+.container-fluid{
 
+}
+.navbar{
+    font-family: MetropolisBold;
+}
+
+.form-control{
+    font-family: Metropolis;
+}
+
+a{
+    text-decoration: none !important;
+}
+/*LANDING*/
 .slick-prev {
     left: 60px;
 
@@ -14,4 +40,59 @@
     background-color: #000000;
     color: #ffffff;
     text-align: center;
+}
+
+.card{
+    width: 100%;
+    background-color: transparent;
+    color:#ffffff !important;
+}
+.card-body{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.card-titulo{
+    text-transform: uppercase;
+    font-family: MetropolisBold;
+    color:#ffffff !important;
+}
+.card-titulo:hover{
+    color:#de0048 !important;
+}
+.card-autorFecha{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 30px;
+    color:#ffffff !important;
+    text-transform: uppercase;
+    font-family: MetropolisBold;
+    font-size: 20px;
+}
+.card-autor{
+    background-color: rgba(255, 255, 255, 0.2);
+    color:#212121 !important;
+    padding: 5px 10px;
+    margin-right: 4px;
+}
+.card-autor a{
+    color:#ffffff !important;
+}
+.card-autor a:hover{
+    color:#de0048 !important;
+}
+.card-comentarios{
+    background-color: rgba(255, 255, 255, 0.2);
+    color:#ffffff !important;
+    padding: 5px 10px;
+    margin-right: 4px;
+}
+.card-fecha{
+    color: rgba(255, 255, 255, 0.2);
+}
+.card-text{
+    font-family: Roboto;
+    font-size: 21px;
+    line-height: 24px;
+    margin-top: 12px;
+    margin-bottom: 20px;
 }
