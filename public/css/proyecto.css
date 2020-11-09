@@ -29,8 +29,25 @@
 .nav-item .nav-link:hover{
     color:var(--color-texto-2) !important;
 }
-
-
+.nav-item .nav-link.btn{
+    border-color:var(--color-texto-2);
+    color: var(--color-texto-2);
+}
+.nav-item .nav-link.btn:hover{
+    background-color: var(--color-texto-2);
+    color:white !important;
+}
+.nav-item .dropdown-menu .dropdown-item{
+    font-family: Metropolis !important;
+}
+.nav-item .dropdown-menu #logoff{
+    background-color: var(--color-texto-2);
+    color: white;
+}
+.nav-item .dropdown-menu #logoff:hover{
+    background-color: #ff7da6;
+    color: white;
+}
 .form-control{
     font-family: Metropolis;
 }
@@ -39,6 +56,13 @@ a{
     text-decoration: none !important;
 }
 /*LANDING*/
+.SliderReseñas{
+    display: none;
+  }
+.SliderReseñas.slick-initialized{
+    display: block;
+}
+
 .slick-prev {
     left: 60px;
 
@@ -53,6 +77,9 @@ a{
     background-color: #000000;
     color: #ffffff;
     text-align: center;
+}
+.SliderReseñas img:hover{
+    transform: translateY(-5px);
 }
 
 .card{
@@ -117,4 +144,28 @@ a{
     font-family: MetropolisBold;
     color:#ffffff;
     text-transform: uppercase;
+}
+.page-item .page-link.active{
+    background-color: var(--color-texto-2);
+}
+
+/*LOGIN-REGISTRO*/
+.card.login-reg{
+    background-color: white;
+    color: black !important;
+    font-family: Roboto;
+    border:none;
+}
+.card.login-reg .card-header{
+    font-family: MetropolisBold;
+    background: var(--color-texto-2);
+    color: white;
+}
+.card.login-reg .card-body .form-group .btn{
+    font-family: MetropolisBold;
+    background-color: var(--color-texto-2);
+    color: white;
+}
+.card.login-reg .card-body .form-group .btn:hover{
+    background-color: #19ca33;
 }

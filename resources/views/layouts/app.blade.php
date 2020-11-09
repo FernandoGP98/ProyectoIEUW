@@ -68,8 +68,8 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     @guest
-                        <li class="nav-item">
-                            <a class="nav-link btn" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
                             <li class="nav-item">
@@ -77,13 +77,20 @@
                             </li>
                         @endif
                     @else
+                    @if (Auth::user()->profile_photo_path==null)
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="{{ url('perfil') }}"><i class="fas fa-user"></i></a>
+                    </li>
+                    @endif
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item" href="/Perfil"> {{ __('Perfil') }}</a>
+                                <a class="dropdown-item" href="/Publicar"> {{ __('Publicar') }}</a>
+                                <a id="logoff" class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -157,7 +164,7 @@
     <script type="text/javascript">
         $(document).ready(function(){
           $('.SliderReseñas').slick({
-            speed: 700,
+            speed: 1200,
             autoplay:false,
             slidesToShow: 7,
             slidesToScroll: 7,

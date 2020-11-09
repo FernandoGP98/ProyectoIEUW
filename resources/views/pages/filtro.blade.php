@@ -3,14 +3,14 @@
 <div class="container">
     <h1 class="titulo-seccion">Noticias</h1>
     <nav aria-label="Page navigation example">
-        <ol class="pagination">
+        <ol class="pagination justify-content-center">
             <li class="page-item"><a class="page-link" href="filtro"><<</a></li>
             @for ($i = 1; $i <= 10; $i++)
                 <li class="page-item {{ request()->is('filtro/'.$i) ? 'active' : '' }}"><a class="page-link" href="filtro/{{$i}}">{{$i}}</a></li>
             @endfor
-          <li class="page-item"><a class="page-link" href="#">>></a></li>
+            <li class="page-item"><a class="page-link" href="#">>></a></li>
         </ol>
-      </nav>
+    </nav>
     @for ($i = 0; $i < 5; $i++)
     <div class="card p-3 {{ $i%2 == 1 ? 'card-gris' : '' }}">
         <div class="row mb-4">
@@ -32,5 +32,14 @@
         </div>
     </div>
     @endfor
+    <nav aria-label="Page navigation example">
+        <ol class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="filtro"><<</a></li>
+            @for ($i = 1; $i <= 10; $i++)
+                <li class="page-item {{ request()->is('filtro/'.$i) ? 'active' : '' }}"><a class="page-link" href="filtro/{{$i}}">{{$i}}</a></li>
+            @endfor
+            <li class="page-item"><a class="page-link" href="#">>></a></li>
+        </ol>
+    </nav>
 </div>
 @endsection
