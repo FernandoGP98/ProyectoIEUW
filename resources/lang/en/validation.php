@@ -87,7 +87,7 @@ return [
     'min' => [
         'numeric' => 'The :attribute must be at least :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',
-        'string' => 'The :attribute must be at least :min characters.',
+        'string' => 'La :attribute debe ser minimo de :min caracteres.',
         'array' => 'The :attribute must have at least :min items.',
     ],
     'multiple_of' => 'The :attribute must be a multiple of :value',
@@ -131,9 +131,16 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'email' => [
+            'unique' => 'El :attribute ya esta siendo usado.',
         ],
+        'password'=>[
+            'confirmed'=>"La :attribute no coincide.",
+            'min' => 'La :attribute debe ser minimo de :min caracteres.',
+        ],
+        'min'=>[
+            'string' => 'La :attribute debe ser minimo de :min caracteres.',
+        ]
     ],
 
     /*
@@ -147,6 +154,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'email'=>'correo',
+        'password'=>'contraseña'
+    ],
 
 ];
