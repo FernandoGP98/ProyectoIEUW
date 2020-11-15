@@ -10,7 +10,7 @@ class Routing extends Controller
         return view('pages.landing');
     }
 
-    public function filtro(){
+    public function filtro($a, $b=1){
         return view('pages.filtro');
     }
 }

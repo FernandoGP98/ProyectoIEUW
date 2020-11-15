@@ -8,7 +8,6 @@ use App\Http\Controllers\Routing;
 });*/
 
 Route::get('/', [Routing::class, 'index']);
-Route::get('/filtro', [Routing::class, 'filtro']);
-Route::get('/filtro/1', [Routing::class, 'filtro']);
+Route::get('/filtro/{a}/{b?}', [Routing::class, 'filtro']);
 
-Route::view('/', 'pages/landing')->middleware('auth');
+//Route::view('/', 'landing')->middleware('auth');

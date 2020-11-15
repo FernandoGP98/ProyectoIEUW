@@ -46,20 +46,20 @@
                     <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('/') }}"><i class="fas fa-home"></i></a>
                     </li>
-                    <li class="nav-item {{ request()->is('filtro*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro') }}">NOTICIAS</a>
+                    <li class="nav-item {{ request()->is('filtro/noticias*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/filtro/noticias') }}">NOTICIAS</a>
                     </li>
-                    <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro') }}">RESEÑAS</a>
+                    <li class="nav-item {{ request()->is('filtro/reseñas*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/filtro/reseñas') }}">RESEÑAS</a>
                     </li>
-                    <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro') }}">NINTENDO</a>
+                    <li class="nav-item {{ request()->is('filtro/nintendo*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/filtro/nintendo') }}">NINTENDO</a>
                     </li>
-                    <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro') }}">SONY</a>
+                    <li class="nav-item {{ request()->is('filtro/sony*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/filtro/sony') }}">SONY</a>
                     </li>
-                    <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro') }}">XBOX</a>
+                    <li class="nav-item {{ request()->is('filtro/xbox*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/filtro/xbox') }}">XBOX</a>
                     </li>
                 </ul>
             </div>
