@@ -10,4 +10,4 @@ use App\Http\Controllers\Routing;
 Route::get('/', [Routing::class, 'index']);
 Route::get('/filtro/{a}/{b?}', [Routing::class, 'filtro']);
 
-//Route::view('/', 'landing')->middleware('auth');
+Route::view('/', 'landing')->middleware('auth');
