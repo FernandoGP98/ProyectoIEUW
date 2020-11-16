@@ -13,4 +13,8 @@ class Routing extends Controller
     public function filtro($a, $b=1){
         return view('pages.filtro');
     }
+
+    public function detalle($a, $b){
+        return view('pages.detalle');
+    }
 }

@@ -114,8 +114,8 @@ a{
 .card-autor{
     background-color: rgba(255, 255, 255, 0.2);
     color:#212121 !important;
-    /*padding: 5px 10px;
-    margin-right: 4px;*/
+    padding: 5px 10px;
+    margin-right: 4px;
 }
 .card-autor a{
     color:#ffffff !important;
@@ -126,8 +126,8 @@ a{
 .card-comentarios{
     background-color: rgba(255, 255, 255, 0.2);
     color:#ffffff !important;
-    /*padding: 5px 10px;
-    margin-right: 4px;*/
+    padding: 5px 10px;
+    margin-right: 4px;
 }
 .card-fecha{
     color: rgba(255, 255, 255, 0.2);
@@ -168,4 +168,13 @@ a{
 }
 .card.login-reg .card-body .form-group .btn:hover{
     background-color: #19ca33;
+}
+
+/*DETALLE*/
+.detalle-contenido{
+    font-family: Roboto;
+}
+
+#NuevoComentario{
+    width: 100%;
 }

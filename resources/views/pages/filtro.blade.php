@@ -6,7 +6,7 @@
         <ol class="pagination justify-content-center">
             <li class="page-item"><a class="page-link" href="filtro"><<</a></li>
             @for ($i = 1; $i <= 10; $i++)
-                <li class="page-item {{ request()->is('filtro/'.$i) ? 'active' : '' }}"><a class="page-link" href="filtro/{{$i}}">{{$i}}</a></li>
+            <li class="page-item {{ request()->is('filtro/noticias/'.$i) ? 'active' : '' }}"><a class="page-link" href="{{url('/filtro/noticias/'.$i)}}">{{$i}}</a></li>
             @endfor
             <li class="page-item"><a class="page-link" href="#">>></a></li>
         </ol>
@@ -36,7 +36,7 @@
         <ol class="pagination justify-content-center">
             <li class="page-item"><a class="page-link" href="filtro"><<</a></li>
             @for ($i = 1; $i <= 10; $i++)
-                <li class="page-item {{ request()->is('filtro/'.$i) ? 'active' : '' }}"><a class="page-link" href="filtro/{{$i}}">{{$i}}</a></li>
+                <li class="page-item {{ request()->is('filtro/noticias/'.$i) ? 'active' : '' }}"><a class="page-link" href="{{url('/filtro/noticias/'.$i)}}">{{$i}}</a></li>
             @endfor
             <li class="page-item"><a class="page-link" href="#">>></a></li>
         </ol>

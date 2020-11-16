@@ -4,10 +4,10 @@
 <div class="row no-gutters">
     <div class="col-md-12 pt-0 SliderReseñas">
 
-        @for ($i=0; $i <20 ; $i++)
+        @for ($i=1; $i <=20 ; $i++)
 
             <div>
-                <img src="https://cdn.atomix.vg/wp-content/uploads/2020/10/Review-Watch-Dogs-Legion-186x278.png" alt="" srcset="">
+                <a href="{{url('detalle/noticia/'.$i)}}"><img src="https://cdn.atomix.vg/wp-content/uploads/2020/10/Review-Watch-Dogs-Legion-186x278.png" alt="" srcset=""></a>
                 <p>Titulo</p>
             </div>
 

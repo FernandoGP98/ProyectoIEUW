@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="https://kit.fontawesome.com/0de3fe663e.js" crossorigin="anonymous" defer></script>
 
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -47,19 +48,19 @@
                         <a class="nav-link" href="{{ url('/') }}"><i class="fas fa-home"></i></a>
                     </li>
                     <li class="nav-item {{ request()->is('filtro/noticias*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro/noticias') }}">NOTICIAS</a>
+                        <a class="nav-link" href="{{ url('/filtro/noticias/1') }}">NOTICIAS</a>
                     </li>
                     <li class="nav-item {{ request()->is('filtro/reseñas*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro/reseñas') }}">RESEÑAS</a>
+                        <a class="nav-link" href="{{ url('/filtro/reseñas/1') }}">RESEÑAS</a>
                     </li>
                     <li class="nav-item {{ request()->is('filtro/nintendo*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro/nintendo') }}">NINTENDO</a>
+                        <a class="nav-link" href="{{ url('/filtro/nintendo/1') }}">NINTENDO</a>
                     </li>
                     <li class="nav-item {{ request()->is('filtro/sony*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro/sony') }}">SONY</a>
+                        <a class="nav-link" href="{{ url('/filtro/sony/1') }}">SONY</a>
                     </li>
                     <li class="nav-item {{ request()->is('filtro/xbox*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro/xbox') }}">XBOX</a>
+                        <a class="nav-link" href="{{ url('/filtro/xbox/1') }}">XBOX</a>
                     </li>
                 </ul>
             </div>
@@ -160,6 +161,7 @@
     <!-- Footer -->
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/b6viljwvwtt7o1eqxe5d2fneiy77vre2xetex4yi6hwl40rb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -170,6 +172,14 @@
             slidesToScroll: 7,
           });
         });
-      </script>
+    </script>
+    <script>
+        tinymce.init({
+            selector: '#noticia-contenido',
+            plugins: [ 'quickbars' ],
+            toolbar: false,
+            menubar: false,
+        });
+    </script>
 </body>
 </html>
