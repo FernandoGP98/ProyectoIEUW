@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class categoria extends Model
 {
     use HasFactory;
+    public function posts()
+    {
+       return $this->hasMany('app\Models\post.php');
+    }
 }

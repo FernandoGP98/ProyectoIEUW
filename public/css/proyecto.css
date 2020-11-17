@@ -178,3 +178,48 @@ a{
 #NuevoComentario{
     width: 100%;
 }
+button[type=submit] i.fa-comment-dots:hover{
+    color: var(--color-texto-2);
+}
+
+/*REDACTAR*/
+.c-detalle{
+    font-family: Roboto;
+}
+.input-multimedia{
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.input-multimedia + label {
+
+    cursor: pointer;
+    display: block;
+    border: 3px solid;
+    border-radius: 25px;
+}
+.input-multimedia:focus + label,
+.input-multimedia+label:hover{
+    background-color: var(--color-texto-2) !important;
+    color: whitesmoke;
+}
+
+.btn-submit#terminarNota,#guardarNota{
+    font-family: MetropolisBold;
+    font-size: 25px;
+    border-radius: 50px;
+    margin-top: 15px;
+}
+#terminarNota{
+    background-color: var(--color-texto-2);
+    color: white;
+    margin-right: 15px !important;
+}
+#guardarNota{
+    border: var(--color-texto-2) solid 5px;
+    color: var(--color-texto-2);
+    margin-left: 15px !important;
+}

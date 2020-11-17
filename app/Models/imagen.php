@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class imagen extends Model
 {
     use HasFactory;
+    public function post()
+    {
+        return $this->belongsTo('app\Models\post.php');
+    }
 }

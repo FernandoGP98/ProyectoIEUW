@@ -21,6 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'rol_id',
+        'profile_photo_path'
     ];
 
     /**
@@ -41,4 +42,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function posts()
+    {
+       return $this->hasMany('app\Models\post.php');
+    }
+
+    public function comments()
+    {
+       return $this->hasMany('app\Models\comentario.php');
+    }
+
+    public function likes()
+    {
+       return $this->hasMany('app\Moodels\Like.php');
+    }
 }

@@ -59,17 +59,17 @@
                     </div>
                 </div>
                 <form action="" method="post">
-                    <div class="row">
+                    <div class="row align-items-center h-100">
 
                         <div class="col-lg-1">
-                            <i class="fas fa-user"></i>
+                            <img style="border-radius:10%;" src="{{Auth::user()->profile_photo_path}}" alt="" width="100%" height="auto">
                         </div>
 
                         <div class="col-lg-10">
                             <input class="w-100 form-control-lg" type="text" name="" id="" placeholder="Unete a la discusion...">
                         </div>
-                        <div class="col-lg-1">
-                            <button class="btn" type="submit"><i class="fas fa-comment-dots"></i></button>
+                        <div class="col-lg-1 ">
+                            <button class="btn px-lg-0" type="submit"><i class="fas fa-comment-dots fa-3x"></i></button>
                         </div>
                     </div>
                 </form>

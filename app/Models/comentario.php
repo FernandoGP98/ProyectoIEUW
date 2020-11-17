@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class comentario extends Model
 {
     use HasFactory;
+
+    public function post()
+    {
+        return $this->belongsTo('app\Models\post.php');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('app\Models\User.php');
+    }
 }

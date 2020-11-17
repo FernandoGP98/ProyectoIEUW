@@ -26,7 +26,7 @@
 </head>
 <body style="background-color: #212121">
     <div id="app">
-        <nav class="mt-0 mb-0 navbar navbar-expand-md navbar-light bg-white shadow-sm justify-content-md-center align-items-start">
+        <nav class="mt-0 mb-0 navbar navbar-expand-md navbar-light bg-white shadow-sm justify-content-md-center">
             <div class="d-flex order-0">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -78,23 +78,25 @@
                             </li>
                         @endif
                     @else
-                    @if (Auth::user()->profile_photo_path==null)
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="{{ url('perfil') }}"><i class="fas fa-user"></i></a>
-                    </li>
-                    @endif
-                        <li class="nav-item dropdown">
+                        <li class="nav-item mx-0">
+                            <a class="mt-lg-5" style="display: inline;" href="{{ url('perfil') }}">
+                                <img style="border-radius:50%; float: right;" src="{{Auth::user()->profile_photo_path}}" alt="" width="5%" height="auto">
+                            </a>
+                        </li>
+                        <li style="clear:right;" class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/Perfil"> {{ __('Perfil') }}</a>
-                                <a class="dropdown-item" href="/Publicar"> {{ __('Publicar') }}</a>
+                                <a class="dropdown-item" href="/redactar/noticia"> {{ __('Redactar noticia') }}</a>
+                                <a class="dropdown-item" href="/redactar/reseña"> {{ __('Redactar reseña') }}</a>
+                                <hr>
                                 <a id="logoff" class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('Cerrar sesion') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -161,8 +163,24 @@
     <!-- Footer -->
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/redactar.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/b6viljwvwtt7o1eqxe5d2fneiy77vre2xetex4yi6hwl40rb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#terminarNota').click(function(e){
+                e.preventDefault();
+                var form = $('#redactarNoticia');
+                var url = form.attr('action');
+                var data = form.serialize();
+
+                $.post(url, data, function(result){
+                    alert(result);
+                });
+            });
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function(){
           $('.SliderReseñas').slick({
@@ -172,13 +190,19 @@
             slidesToScroll: 7,
           });
         });
+
+        $(function() {
+            $('.img-carousel').slick({
+                slidesToShow: 1,
+                dots: true,
+                centerMode: true,
+            });
+        });
     </script>
     <script>
         tinymce.init({
             selector: '#noticia-contenido',
-            plugins: [ 'quickbars' ],
-            toolbar: false,
-            menubar: false,
+            height : "480",
         });
     </script>
 </body>
