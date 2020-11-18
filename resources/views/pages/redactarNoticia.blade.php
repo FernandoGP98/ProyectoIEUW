@@ -3,7 +3,7 @@
 <div class="container c-detalle">
     <div class="row d-flex justify-content-center mb-lg-4">
         <div class="col-lg-10  py-lg-3 px-lg-4 pb-4" style="background-color: white">
-            <form action="/ajax" method="post" enctype="multipart/form-data" id="redactarNoticia">
+            <form action="/noticia" method="post" enctype="multipart/form-data" id="redactarNoticia">
                 @csrf
                 <div class="noticia-titulo">
                     <label for="titulo"><h1>Titulo</h1></label>
@@ -12,12 +12,14 @@
 
                 <div class="noticia-descripcion">
                     <label for="descripcion"><h1>Descripcion</h1></label>
-                    <textarea class="form-control w-100" name="descripcion" id="descripcion" cols="30" rows="5"></textarea>
+                    <textarea class="form-control w-100" name="descripcion" id="descripcion"
+                    cols="30" rows="5" maxlength="255"></textarea>
+                    <p id="Crestantes">255</p>
                 </div>
 
                 <div class="noticia-categoria">
                     <label for="descripcion"><h1>Categoria</h1></label>
-                    <select name="categooria" id="categoria" class="form-control">
+                    <select name="categoria" id="categoria" class="form-control">
                         @for ($i = 0; $i < 2; $i++)
                             <option class="dropdown-item" value="{{$i}}">{{"Categoria ".$i}}</option>
                         @endfor
@@ -32,7 +34,7 @@
 
                 <div class="detalle-contenido my-lg-4">
                     <label for="noticia-contenido"><h1>Contenido</h1></label>
-                    <textarea class="form-control" name="noticia-contenido" id="noticia-contenido"></textarea>
+                    <textarea class="form-control" name="noticia_contenido" id="noticia-contenido"></textarea>
                 </div>
 
                 <div class="contenedor-imagenes" style="width: 100%;">
@@ -40,7 +42,7 @@
 
                     <input type="file" name="fileImagenes[]" id="multimedia"
                         class="input-multimedia" accept="image/*"
-                        style="width: 70%">
+                        style="width: 70%" multiple>
 
                     <label id="img_input" for="multimedia" class="btn"><i
                             class="mr-2 fas fa-file-upload"></i>Imagenes</label>
@@ -73,7 +75,7 @@
                 </div>
 
                 <input type="text" value="{{Auth::user()->id}}" name="autor" hidden>
-                <input type="text" value="0" name="esNoticia" hidden>
+                <input type="text" value="1" name="esNoticia" hidden>
                 <div class="text-center ">
                     <input class="mb-2 btn btn-submit" type="submit" value="Publicar" id="terminarNota">
                     <!--<input class="mb-2 btn btn-submit" type="submit" value="Guardar" id="guardarNota">-->

@@ -2,6 +2,15 @@ $(document).ready(function(){
     var imagen = 0;
     var clone22;
 
+    $("#descripcion").on("input", function(){
+        var maxLenght=$(this).attr("maxlength");
+        var currentLenght = $(this).val().length;
+
+        if(currentLenght<=maxLenght){
+            $('#Crestantes').text(maxLenght-currentLenght);
+        }
+    });
+
     $("#multimedia").change(function() {
         console.log("entro");
         imagen = imagen + 1;
@@ -9,12 +18,12 @@ $(document).ready(function(){
         readURL(this, imagen);
         valImagen = true;
 
-        validar(valImagen, valVideo,valTitulo, valDescripcion, valTexto, valLugar, valFecha);
+
     });
 
     $("#multimedia-v").change(function(){
         valVideo = true;
-        validar(valImagen, valVideo,valTitulo, valDescripcion, valTexto, valLugar, valFecha);
+
     });
 
     function sliderInit(){

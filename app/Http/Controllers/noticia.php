@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Ajax extends Controller
+class noticia extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,29 @@ class Ajax extends Controller
      */
     public function store(Request $request)
     {
+        $nuevaNoticia=new post();
+        $nuevaNoticia->titulo=$request->titulo;
+        $nuevaNoticia->descripcion=$request->descripcion;
+        switch ($request->categoria) {
+            case 'Nintendo':
+                $nuevaNoticia->categoria_id=1;
+                break;
+            case 'Sony':
+                $nuevaNoticia->categoria_id=2;
+                break;
+            case 'Xbox':
+                $nuevaNoticia->categoria_id=3;
+                break;
+        }
 
+        $nuevaNoticia->fecha=$request->fecha;
+        $nuevaNoticia->contenido=$request->noticia_contenido;
+        $nuevaNoticia->user_id=$request->autor;
+        $nuevaNoticia->titulo=$noticia_reseña->esNoticia;
+
+        if($request->hasFile('imagenes')){
+
+        }
     }
 
     /**
