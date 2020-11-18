@@ -13,6 +13,9 @@
 :root{
     --color-texto-2: #de0048;
 }
+body{
+    background-color: #212121;
+}
 .navbar{
     font-family: MetropolisBold;
 }
@@ -63,9 +66,13 @@ a{
     display: block;
 }
 
+.slick-prev:before, .slick-next:before{
+    font-size: 50px;
+    color: var(--color-texto-2);
+}
+
 .slick-prev {
     left: 60px;
-
     z-index: 1;
 }
 
@@ -87,12 +94,35 @@ a{
     background-color: transparent;
     color:#ffffff !important;
 }
+.card .imgPost{
+    height: 512px;
+    object-fit: cover;
+
+}
+.card .gradient:before{
+    content: '';
+    position:absolute;
+    top:-25%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    background: rgb(255,255,255);
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(33,33,33,1) 80%);
+    z-index: 1;
+}
+.col-md-9 .card-body{
+    z-index: 2;
+}
 .card.card-gris{
     background-color: #2e2e2e;
 }
 .col-md-8 .card-body{
     padding-left: 50px;
     padding-right: 50px;
+
 }
 .card-titulo{
     text-transform: uppercase;
@@ -222,4 +252,8 @@ button[type=submit] i.fa-comment-dots:hover{
     border: var(--color-texto-2) solid 5px;
     color: var(--color-texto-2);
     margin-left: 15px !important;
+}
+.img-slide{
+    height: 512px;
+    object-fit: cover;
 }

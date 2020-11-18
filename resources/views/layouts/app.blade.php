@@ -24,7 +24,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/proyecto.css') }}" rel="stylesheet">
 </head>
-<body style="background-color: #212121">
+<body>
     <div id="app">
         <nav class="mt-0 mb-0 navbar navbar-expand-md navbar-light bg-white shadow-sm justify-content-md-center">
             <div class="d-flex order-0">
@@ -168,6 +168,7 @@
     <script src="{{ asset('js/redactar.js') }}"></script>
     <script src="https://cdn.tiny.cloud/1/b6viljwvwtt7o1eqxe5d2fneiy77vre2xetex4yi6hwl40rb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    @yield('scripts')
     <script type="text/javascript">
         $(document).ready(function(){
           $('.SliderReseñas').slick({
@@ -181,6 +182,7 @@
         $(function() {
             $('.img-carousel').slick({
                 slidesToShow: 1,
+                slidesToScroll: 1,
                 dots: true,
                 centerMode: true,
             });

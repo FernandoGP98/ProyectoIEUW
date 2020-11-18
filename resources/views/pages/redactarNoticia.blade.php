@@ -20,9 +20,11 @@
                 <div class="noticia-categoria">
                     <label for="descripcion"><h1>Categoria</h1></label>
                     <select name="categoria" id="categoria" class="form-control">
-                        @for ($i = 0; $i < 2; $i++)
-                            <option class="dropdown-item" value="{{$i}}">{{"Categoria ".$i}}</option>
-                        @endfor
+
+                        <option class="dropdown-item" value="1">Nintendo</option>
+                        <option class="dropdown-item" value="2">Sony</option>
+                        <option class="dropdown-item" value="3">Xbox</option>
+
                     </select>
                 </div>
 

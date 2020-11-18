@@ -1,13 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
+
+use App\Models\post;
+use App\Models\imagen;
+use App\Models\User;
 
 class Routing extends Controller
 {
     public function index(){
-        return view('pages.landing');
+        $noticias = DB::table('posts')
+        ->join('users', 'users.id', '=', 'posts.user_id')
+        ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+        ->select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
+         'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen');
+
+        $noticias = $noticias->get();
+
+        return view('pages.landing')->with(compact('noticias'));
+
     }
 
     public function redactarNoticia(){
@@ -23,6 +37,11 @@ class Routing extends Controller
     }
 
     public function detalle($a, $b){
-        return view('pages.detalle');
+        $noticia = post::find($b);
+        $autor = User::find($noticia->user_id);
+        $autor=$autor->name;
+
+        $imagenes = imagen::where('post_id', $b)->get();
+        return view('pages.detalle')->with(compact('noticia', 'autor', 'imagenes'));
     }
 }

@@ -14,20 +14,29 @@
         @endfor
     </div>
 </div>
+
 <div class="row no-gutters">
     <div class="col-md-9">
+        @foreach ($noticias as $item)
         <div class="card">
-            <img id ="imgPost" class="card-img-top" src="https://cdn.atomix.vg/wp-content/uploads/2020/11/New-Project-2020-11-03T170620.951.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h1><a class="card-titulo" title="Lee: Titulo bien perron">DAYS GONE TENDRÁ MEJORA GRATUITA PARA PS5</a></h1>
-                <div class="card-autorFecha">
-                    <span class="card-autor">Por <a href="/autor" title="Autor">Autor perron</a></span>
-                    <span class="card-comentarios"> 0 comentarios</span>
-                    <span class="card-fecha">3/11/2020 7:52 PM</span>
+            <a href="{{url('/detalle/noticia/'.$item->id)}}">
+                <div class="gradient">
+                    <img id class="imgPost card-img-top" src="{{$item->imagen}}" alt="Card image cap">
                 </div>
-                <p class="card-text">Cada vez son más los desarrolladores que confirman mejoras gratuitas de sus juegos para PlayStation 5, y ahora podemos sumar a Sony Bend a esa lista. El estudio confirmó que su más reciente proyecto, Days Gone, también tendrá una serie de actualizaciones para esta nueva consola y acá te decimos exactamente cuáles son.</p>
+            </a>
+            <div class="card-body">
+                <h1><a class="card-titulo" title="Lee: Titulo bien perron">{{$item->titulo}}</a></h1>
+                <div class="card-autorFecha">
+                    <span class="card-autor">Por <a href="/autor" title="Autor">{{$item->autor}}</a></span>
+                    <span class="card-comentarios"> 0 comentarios</span>
+                    <span class="card-fecha">{{$item->fecha}}</span>
+                </div>
+                    <p class="card-text">
+                        {{$item->descripcion}}
+                    </p>
+                </div>
             </div>
-        </div>
+        @endforeach
     </div>
     <div class="col-md-3">
 

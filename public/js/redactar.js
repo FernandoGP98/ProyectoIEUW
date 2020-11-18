@@ -39,7 +39,7 @@ $(document).ready(function(){
             var reader = new FileReader();
 
             reader.onload = function(e) {
-                var elemento = '<div><img class="img-slide" width="100%" height="512px" src="'+e.target.result+'" alt="First slide"> <input type="button" class="imagenEliminar btn btn-submit" value="Eliminar"><p id="'+intento+'"></p></div>'
+                var elemento = '<div><img class="img-slide" width="100%" src="'+e.target.result+'" alt="First slide"> <input type="button" class="imagenEliminar btn btn-submit" value="Eliminar"><p id="'+intento+'"></p></div>'
 
                 //$("#nueva-imagen").attr("src", e.target.result);
                 $(".img-carousel").append(elemento);
