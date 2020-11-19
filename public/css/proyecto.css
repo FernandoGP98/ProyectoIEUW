@@ -211,7 +211,10 @@ a{
 button[type=submit] i.fa-comment-dots:hover{
     color: var(--color-texto-2);
 }
-
+.comentario{
+    background-color: #212121; color:white; border-radius:15px;
+    font-family: Roboto;
+}
 /*REDACTAR*/
 .c-detalle{
     font-family: Roboto;

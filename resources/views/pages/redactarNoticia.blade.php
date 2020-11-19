@@ -54,7 +54,7 @@
                     </div>
                 </div>
 
-                <div id="imagenes-input">
+                <div id="imagenes-input hidden">
                     <small>Esto va HIDDEN al final, lo dejo por ahora, para asegurarme de que funciona</small>
                     <br>
                     Imagenes: <span id="contador">###</span>

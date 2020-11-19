@@ -61,6 +61,12 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-4">
+                                ¿Ya tienes cuenta? <span>  <a href="{{ route('login') }}">inicia sesión</a></span>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn">

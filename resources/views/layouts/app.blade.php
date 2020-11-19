@@ -90,8 +90,10 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/Perfil"> {{ __('Perfil') }}</a>
+                                @auth
                                 <a class="dropdown-item" href="/redactar/noticia"> {{ __('Redactar noticia') }}</a>
                                 <a class="dropdown-item" href="/redactar/reseña"> {{ __('Redactar reseña') }}</a>
+                                @endauth
                                 <hr>
                                 <a id="logoff" class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
