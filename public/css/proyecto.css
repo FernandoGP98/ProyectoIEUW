@@ -215,6 +215,14 @@ button[type=submit] i.fa-comment-dots:hover{
     background-color: #212121; color:white; border-radius:15px;
     font-family: Roboto;
 }
+.categoria{
+    color: var(--color-texto-2);
+    font-family: MetropolisBold;
+    display: inline;
+}
+.categoria:hover{
+    color: #c74b72;
+}
 /*REDACTAR*/
 .c-detalle{
     font-family: Roboto;

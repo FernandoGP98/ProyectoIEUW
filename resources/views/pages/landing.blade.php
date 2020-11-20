@@ -7,7 +7,7 @@
         @for ($i=1; $i <=20 ; $i++)
 
             <div>
-                <a href="{{url('detalle/noticia/'.$i)}}"><img src="https://cdn.atomix.vg/wp-content/uploads/2020/10/Review-Watch-Dogs-Legion-186x278.png" alt="" srcset=""></a>
+                <a href="{{url('detalle/reseña/'.$i)}}"><img src="https://cdn.atomix.vg/wp-content/uploads/2020/10/Review-Watch-Dogs-Legion-186x278.png" alt="" srcset=""></a>
                 <p>Titulo</p>
             </div>
 
@@ -33,6 +33,7 @@
                             <span class="card-comentarios"> {{$count->Total}} comentarios</span>
                         @endif
                     @endforeach
+                    <a href="{{url('/filtro/'.$item->categoria)}}"><span class="categoria">{{$item->categoria}}</span></a>
                     <span class="card-fecha">{{$item->fecha}}</span>
                 </div>
                     <p class="card-text">

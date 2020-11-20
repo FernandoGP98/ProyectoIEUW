@@ -23,7 +23,10 @@
             <div class="detalle-contenido my-lg-4">
                 <?= $noticia->contenido ?>
             </div>
-
+            <div >
+                <h2 style="display:inline; font-family: MetropolisBold;">Seccion: </h2>
+                <a href="{{url('/filtro/'.$categoria->titulo)}}"><h4 style="display:inline;"><span class="categoria">{{$categoria->titulo}}</span></h4></a>
+            </div>
             @auth
             <div class="like">
             <h1 id="conteo" style="display:inline; font-family: MetropolisBold;">{{$conteo}}</h1>

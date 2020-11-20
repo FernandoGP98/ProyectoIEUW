@@ -48,19 +48,19 @@
                         <a class="nav-link" href="{{ url('/') }}"><i class="fas fa-home"></i></a>
                     </li>
                     <li class="nav-item {{ request()->is('filtro/noticias*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro/noticias/1') }}">NOTICIAS</a>
+                        <a class="nav-link" href="{{ url('/filtro/noticias') }}">NOTICIAS</a>
                     </li>
                     <li class="nav-item {{ request()->is('filtro/reseñas*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro/reseñas/1') }}">RESEÑAS</a>
+                        <a class="nav-link" href="{{ url('/filtro/reseñas') }}">RESEÑAS</a>
                     </li>
                     <li class="nav-item {{ request()->is('filtro/nintendo*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro/nintendo/1') }}">NINTENDO</a>
+                        <a class="nav-link" href="{{ url('/filtro/nintendo') }}">NINTENDO</a>
                     </li>
                     <li class="nav-item {{ request()->is('filtro/sony*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro/sony/1') }}">SONY</a>
+                        <a class="nav-link" href="{{ url('/filtro/sony') }}">SONY</a>
                     </li>
                     <li class="nav-item {{ request()->is('filtro/xbox*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro/xbox/1') }}">XBOX</a>
+                        <a class="nav-link" href="{{ url('/filtro/xbox') }}">XBOX</a>
                     </li>
                 </ul>
             </div>
@@ -89,7 +89,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/Perfil"> {{ __('Perfil') }}</a>
+                                <a class="dropdown-item" href="/perfil"> {{ __('Perfil') }}</a>
                                 @auth
                                 <a class="dropdown-item" href="/redactar/noticia"> {{ __('Redactar noticia') }}</a>
                                 <a class="dropdown-item" href="/redactar/reseña"> {{ __('Redactar reseña') }}</a>
