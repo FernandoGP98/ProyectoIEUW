@@ -5,12 +5,13 @@
     <div class="col-md-12 pt-0 SliderReseñas">
 
         @for ($i=1; $i <=20 ; $i++)
-
-            <div>
-                <a href="{{url('detalle/reseña/'.$i)}}"><img src="https://cdn.atomix.vg/wp-content/uploads/2020/10/Review-Watch-Dogs-Legion-186x278.png" alt="" srcset=""></a>
+            <div class="reseña-item">
+                <a href="{{url('detalle/reseña/'.$i)}}">
+                    <img class="reseña-badge" width="60px" height="auto" src="\images\BADGES.png">
+                    <img src="https://cdn.atomix.vg/wp-content/uploads/2020/10/Review-Watch-Dogs-Legion-186x278.png" alt="" srcset="">
+                </a>
                 <p>Titulo</p>
             </div>
-
         @endfor
     </div>
 </div>

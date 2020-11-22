@@ -85,7 +85,7 @@ class Routing extends Controller
 
                 return view('pages.filtro')->with(compact('noticias', 'countC', 'header'));
                 break;
-            case 'nintendo':
+            case 'Nintendo':
                 $noticias = DB::table('posts')
                 ->select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
                  'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
@@ -105,7 +105,7 @@ class Routing extends Controller
 
                 return view('pages.filtro')->with(compact('noticias', 'countC', 'header'));
                 break;
-            case 'sony':
+            case 'Sony':
                 $noticias = DB::table('posts')
                 ->select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
                  'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
@@ -125,7 +125,7 @@ class Routing extends Controller
 
                 return view('pages.filtro')->with(compact('noticias', 'countC', 'header'));
                 break;
-            case 'xbox':
+            case 'Xbox':
                 $noticias = DB::table('posts')
                 ->select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
                  'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')

@@ -48,7 +48,6 @@ $(document).ready(function(){
             }
 
             /* Add input Hidden para subir al server */
-            alert(clone22.val());
             clone22.removeClass("input-multimedia");
             clone22.attr("id", intento);
             clone22.attr("name","imagenes[]");

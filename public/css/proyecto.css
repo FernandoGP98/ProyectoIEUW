@@ -85,8 +85,20 @@ a{
     color: #ffffff;
     text-align: center;
 }
-.SliderReseñas img:hover{
+.SliderReseñas .reseña-item:hover{
     transform: translateY(-5px);
+}
+
+.reseña-item{
+    position:relative;
+    padding-top:20px;
+    display:inline-block;
+}
+.reseña-badge{
+    position: absolute;
+    left:0px;
+    top:20px;
+    z-index: 1;
 }
 
 .card{
@@ -273,7 +285,3 @@ button[type=submit] i.fa-comment-dots:hover{
     font-family: MetropolisBold;
 }
 .toast-success{background: #1bb630;}
-#error{background: red;}
-#warning{background: coral;}
-#info{background: cornflowerblue;}
-#question{background: grey;}

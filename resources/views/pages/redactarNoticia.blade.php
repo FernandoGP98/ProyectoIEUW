@@ -7,7 +7,7 @@
                 @csrf
                 <div class="noticia-titulo">
                     <label for="titulo"><h1>Titulo</h1></label>
-                <input class="w-100 form-control" type="text" name="titulo" id="titulo">
+                <input style="text-transform: uppercase;" class="w-100 form-control" type="text" name="titulo" id="titulo">
                 </div>
 
                 <div class="noticia-descripcion">
@@ -54,7 +54,7 @@
                     </div>
                 </div>
 
-                <div id="imagenes-input" hidden>
+                <div id="imagenes-input" hiddenclass="reseña-badge">
                     <small>Esto va HIDDEN al final, lo dejo por ahora, para asegurarme de que funciona</small>
                     <br>
                     Imagenes: <span id="contador">###</span>

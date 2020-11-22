@@ -54,14 +54,14 @@
                     <li class="nav-item {{ request()->is('filtro/reseñas*') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('/filtro/reseñas') }}">RESEÑAS</a>
                     </li>
-                    <li class="nav-item {{ request()->is('filtro/nintendo*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro/nintendo') }}">NINTENDO</a>
+                    <li class="nav-item {{ request()->is('filtro/Nintendo*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/filtro/Nintendo') }}">NINTENDO</a>
                     </li>
-                    <li class="nav-item {{ request()->is('filtro/sony*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro/sony') }}">SONY</a>
+                    <li class="nav-item {{ request()->is('filtro/Sony*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/filtro/Sony') }}">SONY</a>
                     </li>
-                    <li class="nav-item {{ request()->is('filtro/xbox*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/filtro/xbox') }}">XBOX</a>
+                    <li class="nav-item {{ request()->is('filtro/Xbox*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/filtro/Xbox') }}">XBOX</a>
                     </li>
                 </ul>
             </div>

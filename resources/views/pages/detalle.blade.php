@@ -110,6 +110,12 @@
 @section('scripts')
 <script>
     $(document).ready(function(){
+        $('.img-carousel').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                dots: true,
+                centerMode: true,
+            });
 
         $('#comentar').click(function(e){
             e.preventDefault();
@@ -138,7 +144,7 @@
                                 '<div class="row">'+
                                     '<div class="col-lg-12">'+
                                         nombre+
-                                        '<p style="display: inline-block"> - Fechas</p>'+
+                                        '<p style="display: inline-block"> - Hace unos momentos</p>'+
                                     '</div>'+
                                 '</div>'+
                                 '<div>'+
