@@ -54,7 +54,7 @@
                     </div>
                 </div>
 
-                <div id="imagenes-input hidden">
+                <div id="imagenes-input" hidden>
                     <small>Esto va HIDDEN al final, lo dejo por ahora, para asegurarme de que funciona</small>
                     <br>
                     Imagenes: <span id="contador">###</span>
@@ -87,8 +87,19 @@
     </div>
 </div>
 @endsection
-@if (!empty(Session::get('toastr')))
-    @section('scripts')
+
+@section('scripts')
+    <script type="text/javascript">
+        $(function() {
+            $('.img-carousel').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                dots: true,
+                centerMode: true,
+            });
+        });
+    </script>
+    @if (!empty(Session::get('toastr')))
     <script>
         $(document).ready(function(){
             toastr.options = {
@@ -112,5 +123,6 @@
         });
 
     </script>
-    @endsection
-@endif
+    @endif
+@endsection
+

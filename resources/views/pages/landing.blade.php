@@ -44,5 +44,17 @@
         @endforeach
     </div>
 </div>
+@endsection
 
+@section('scripts')
+<script>
+    $(document).ready(function(){
+            $('.SliderReseñas').slick({
+                speed: 1200,
+                autoplay:false,
+                slidesToShow: 7,
+                slidesToScroll: 7,
+            });
+        });
+</script>
 @endsection

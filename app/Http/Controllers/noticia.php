@@ -39,7 +39,7 @@ class noticia extends Controller
      */
     public function store(Request $request)
     {
-        /*$nuevaNoticia=new post();
+        $nuevaNoticia=new post();
         $nuevaNoticia->titulo=$request->titulo;
         $nuevaNoticia->descripcion=$request->descripcion;
         $nuevaNoticia->categoria_id=$request->categoria;
@@ -59,26 +59,25 @@ class noticia extends Controller
                 $imgName = time().$i.'.'.$imagen->getClientOriginalExtension();
 
                 $imagen->move('images/', $imgName);
-                $rute='images/'.$imgName;
+                $rute='/images/'.$imgName;
                 $img->imagen=$rute;
                 $img->post_id=$idPost;
                 $img->save();
                 $i++;
             }
-        }*/
+        }
 
-        /*if($request->hasFile('video')){
+        if($request->hasFile('video')){
             $video = $request->file('video');
             $vid = new video;
             $vidName = time().'.'.$video->getClientOriginalExtension();
 
             $video->move('videos/', $vidName);
-            $rute='videos/'.$vidName;
+            $rute='/videos/'.$vidName;
             $vid->video=$rute;
-            //$vid->post_id=$idPost;
-            $vid->post_id=1;
-            //$vid->save();
-        }*/
+            $vid->post_id=$idPost;
+            $vid->save();
+        }
         return redirect()->back()->with('toastr', 1);
     }
 
