@@ -268,3 +268,12 @@ button[type=submit] i.fa-comment-dots:hover{
     height: 512px;
     object-fit: cover;
 }
+
+#toast-container{
+    font-family: MetropolisBold;
+}
+.toast-success{background: #1bb630;}
+#error{background: red;}
+#warning{background: coral;}
+#info{background: cornflowerblue;}
+#question{background: grey;}

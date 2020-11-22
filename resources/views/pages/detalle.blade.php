@@ -110,6 +110,7 @@
 @section('scripts')
 <script>
     $(document).ready(function(){
+
         $('#comentar').click(function(e){
             e.preventDefault();
             let _token   = $('meta[name="csrf-token"]').attr('content');
@@ -178,8 +179,8 @@
         $('#btnLikeNo').click(function(e){
             e.preventDefault();
             let _token   = $('meta[name="csrf-token"]').attr('content');
-            let usuario = $("input[name=usuarioLikeNo]").val();
-            let post = $("input[name=noticiaLikeNo]").val();
+            let usuario = $('input[name="usuarioLikeNo"]').val();
+            let post = $('input[name="noticiaLikeNo"]').val();
             let conteo = $("#conteo").text();
             $.ajax({
                 url:"/like",
