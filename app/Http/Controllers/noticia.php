@@ -39,45 +39,50 @@ class noticia extends Controller
      */
     public function store(Request $request)
     {
-        $nuevaNoticia=new post();
-        $nuevaNoticia->titulo=$request->titulo;
-        $nuevaNoticia->descripcion=$request->descripcion;
-        $nuevaNoticia->categoria_id=$request->categoria;
-        $nuevaNoticia->fecha=$request->fecha;
-        $nuevaNoticia->contenido=$request->noticia_contenido;
-        $nuevaNoticia->user_id=$request->autor;
-        $nuevaNoticia->noticia_reseña=$request->esNoticia;
-        $nuevaNoticia->publicado=0;
-        $nuevaNoticia->save();
-        $idPost = $nuevaNoticia->id;
+        try {
+            $nuevaNoticia=new post();
+            $nuevaNoticia->titulo=$request->titulo;
+            $nuevaNoticia->descripcion=$request->descripcion;
+            $nuevaNoticia->categoria_id=$request->categoria;
+            $nuevaNoticia->fecha=$request->fecha;
+            $nuevaNoticia->contenido=$request->noticia_contenido;
+            $nuevaNoticia->user_id=$request->autor;
+            $nuevaNoticia->noticia_reseña=$request->esNoticia;
+            $nuevaNoticia->publicado=0;
+            $nuevaNoticia->save();
+            $idPost = $nuevaNoticia->id;
 
 
-        $i=0;
-        if($request->hasFile('imagenes')){
-            foreach ($request->file('imagenes') as $imagen) {
-                $img = new imagen;
-                $imgName = time().$i.'.'.$imagen->getClientOriginalExtension();
+            $i=0;
+            if($request->hasFile('imagenes')){
+                foreach ($request->file('imagenes') as $imagen) {
+                    $img = new imagen;
+                    $imgName = time().$i.'.'.$imagen->getClientOriginalExtension();
 
-                $imagen->move('images/', $imgName);
-                $rute='/images/'.$imgName;
-                $img->imagen=$rute;
-                $img->post_id=$idPost;
-                $img->save();
-                $i++;
+                    $imagen->move('images/', $imgName);
+                    $rute='/images/'.$imgName;
+                    $img->imagen=$rute;
+                    $img->post_id=$idPost;
+                    $img->save();
+                    $i++;
+                }
             }
+
+            if($request->hasFile('video')){
+                $video = $request->file('video');
+                $vid = new video;
+                $vidName = time().'.'.$video->getClientOriginalExtension();
+
+                $video->move('videos/', $vidName);
+                $rute='/videos/'.$vidName;
+                $vid->video=$rute;
+                $vid->post_id=$idPost;
+                $vid->save();
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('no', 2);
         }
 
-        if($request->hasFile('video')){
-            $video = $request->file('video');
-            $vid = new video;
-            $vidName = time().'.'.$video->getClientOriginalExtension();
-
-            $video->move('videos/', $vidName);
-            $rute='/videos/'.$vidName;
-            $vid->video=$rute;
-            $vid->post_id=$idPost;
-            $vid->save();
-        }
         return redirect()->back()->with('toastr', 1);
     }
 

@@ -21,14 +21,20 @@ class Routing extends Controller
          'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen', 'categorias.titulo as categoria')
         ->join('users', 'users.id', '=', 'posts.user_id')
         ->join('categorias', 'categorias.id', '=', 'posts.categoria_id')
-        ->join('imagens', 'imagens.post_id', '=', 'posts.id')->groupBy('posts.id')
+        ->join('imagens', 'imagens.post_id', '=', 'posts.id')->where('posts.noticia_reseña', 1)->groupBy('posts.id');
+
+        $noticias = $noticias->orderBy('fecha', 'desc')->get();
+
+        $reseñas = DB::table('posts')
+        ->select('posts.id as id','posts.titulo as titulo','imagens.imagen as imagen')
+        ->join('imagens', 'imagens.post_id', '=', 'posts.id')->where('posts.noticia_reseña', 0)->groupBy('posts.id')
         ->get();
 
         $countC = DB::table('posts')
         ->selectRaw('posts.id,count(posts.id) as Total')
         ->join('comentarios', 'posts.id', '=', 'comentarios.post_id')->groupBy('posts.id')->get();
 
-        return view('pages.landing')->with(compact('noticias', 'countC'));
+        return view('pages.landing')->with(compact('noticias', 'reseñas', 'countC'));
     }
 
     public function redactarNoticia(){

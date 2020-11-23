@@ -91,14 +91,15 @@ a{
 
 .reseña-item{
     position:relative;
-    padding-top:20px;
     display:inline-block;
 }
 .reseña-badge{
     position: absolute;
     left:0px;
-    top:20px;
     z-index: 1;
+}
+.reseña-imagen{
+    object-fit: cover;
 }
 
 .card{
@@ -114,16 +115,16 @@ a{
 .card .gradient:before{
     content: '';
     position:absolute;
-    top:-25%;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     display: inline-block;
     background: rgb(255,255,255);
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(33,33,33,1) 80%);
-    z-index: 1;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 60%, rgba(33,33,33,1) 65%);
+    z-index: -1;
 }
 .col-md-9 .card-body{
     z-index: 2;

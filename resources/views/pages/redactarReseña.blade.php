@@ -119,7 +119,32 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
             }
-            toastr.success('Noticia guardada, revise su perfil');
+            toastr.success('Reseña guardada, revise su perfil');
+        });
+
+    </script>
+    @endif
+    @if (!empty(Session::get('no')))
+    <script>
+        $(document).ready(function(){
+            toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+            }
+            toastr.error('Hubo un error, no se pudo guardar su reseña');
         });
 
     </script>

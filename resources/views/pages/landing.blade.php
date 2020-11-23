@@ -3,15 +3,19 @@
 
 <div class="row no-gutters">
     <div class="col-md-12 pt-0 SliderReseñas">
-
-        @for ($i=1; $i <=20 ; $i++)
-            <div class="reseña-item">
-                <a href="{{url('detalle/reseña/'.$i)}}">
+        @foreach ($reseñas as $res)
+            <div>
+                <div  class="reseña-item">
+                <a href="{{url('detalle/reseña/'.$res->id)}}">
                     <img class="reseña-badge" width="60px" height="auto" src="\images\BADGES.png">
-                    <img src="https://cdn.atomix.vg/wp-content/uploads/2020/10/Review-Watch-Dogs-Legion-186x278.png" alt="" srcset="">
+                    <img class="reseña-imagen" width="186px" height="270px" src="{{$res->imagen}}" alt="" srcset="">
                 </a>
-                <p>Titulo</p>
+                </div>
+                <p>{{$res->titulo}}</p>
             </div>
+        @endforeach
+        @for ($i=1; $i <=20 ; $i++)
+
         @endfor
     </div>
 </div>
@@ -20,28 +24,29 @@
     <div class="col-md-9">
         @foreach ($noticias as $item)
         <div class="card">
+
             <a href="{{url('/detalle/noticia/'.$item->id)}}">
-                <div class="gradient">
-                    <img id class="imgPost card-img-top" src="{{$item->imagen}}" alt="Card image cap">
-                </div>
+                <img id class="imgPost card-img-top" src="{{$item->imagen}}" alt="Card image cap">
             </a>
             <div class="card-body">
-                <h1><a class="card-titulo" title="Lee: Titulo bien perron" href="{{url('/detalle/noticia/'.$item->id)}}">{{$item->titulo}}</a></h1>
-                <div class="card-autorFecha">
-                    <span class="card-autor">Por <a href="/autor" title="Autor">{{$item->autor}}</a></span>
-                    @foreach ($countC as $count)
-                        @if ($count->id==$item->id)
-                            <span class="card-comentarios"> {{$count->Total}} comentarios</span>
-                        @endif
-                    @endforeach
-                    <a href="{{url('/filtro/'.$item->categoria)}}"><span class="categoria">{{$item->categoria}}</span></a>
-                    <span class="card-fecha">{{$item->fecha}}</span>
-                </div>
+                <div class="gradient">
+                    <h1><a class="card-titulo" title="Lee: Titulo bien perron" href="{{url('/detalle/noticia/'.$item->id)}}">{{$item->titulo}}</a></h1>
+                    <div class="card-autorFecha">
+                        <span class="card-autor">Por <a href="/autor" title="Autor">{{$item->autor}}</a></span>
+                        @foreach ($countC as $count)
+                            @if ($count->id==$item->id)
+                                <span class="card-comentarios"> {{$count->Total}} comentarios</span>
+                            @endif
+                        @endforeach
+                        <a href="{{url('/filtro/'.$item->categoria)}}"><span class="categoria">{{$item->categoria}}</span></a>
+                        <span class="card-fecha">{{$item->fecha}}</span>
+                    </div>
                     <p class="card-text">
                         {{$item->descripcion}}
                     </p>
                 </div>
             </div>
+        </div>
         @endforeach
     </div>
 </div>
