@@ -40,13 +40,28 @@ class Routing extends Controller
     public function redactarNoticia(){
         return view('pages.redactarNoticia');
     }
+    public function editarPublicacion($a){
+        $post=post::find($a);
+        return view('pages.editarPublicacion')->with(compact('post'));
+    }
 
     public function redactarReseña(){
         return view('pages.redactarReseña');
     }
 
     public function perfil(){
-        return view('pages.perfil');
+        $pp = post::select('posts.id', 'posts.titulo', 'imagens.imagen', 'posts.noticia_reseña')
+        ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+        ->where('user_id', Auth::user()->id)->where('publicado', 0)->groupBy('posts.id')->get();
+
+        $noticias = post::select('posts.id', 'posts.titulo', 'imagens.imagen', 'posts.noticia_reseña')
+        ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+        ->where('user_id', Auth::user()->id)->where('posts.noticia_reseña', 1)->groupBy('posts.id')->get();
+
+        $reseñas = post::select('posts.id', 'posts.titulo', 'imagens.imagen', 'posts.noticia_reseña')
+        ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+        ->where('user_id', Auth::user()->id)->where('posts.noticia_reseña', 0)->groupBy('posts.id')->get();
+        return view('pages.perfil')->with(compact('pp', 'noticias', 'reseñas'));
     }
 
     public function filtro($a){

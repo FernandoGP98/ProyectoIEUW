@@ -5,7 +5,7 @@
     <div class="col-md-12 pt-0 SliderReseñas">
         @foreach ($reseñas as $res)
             <div>
-                <div  class="reseña-item">
+                <div class="reseña-item">
                 <a href="{{url('detalle/reseña/'.$res->id)}}">
                     <img class="reseña-badge" width="60px" height="auto" src="\images\BADGES.png">
                     <img class="reseña-imagen" width="186px" height="270px" src="{{$res->imagen}}" alt="" srcset="">
@@ -14,9 +14,6 @@
                 <p>{{$res->titulo}}</p>
             </div>
         @endforeach
-        @for ($i=1; $i <=20 ; $i++)
-
-        @endfor
     </div>
 </div>
 
@@ -55,12 +52,12 @@
 @section('scripts')
 <script>
     $(document).ready(function(){
-            $('.SliderReseñas').slick({
-                speed: 1200,
-                autoplay:false,
-                slidesToShow: 7,
-                slidesToScroll: 7,
-            });
+        $('.SliderReseñas').slick({
+            speed: 1200,
+            autoplay:false,
+            slidesToShow: 7,
+            slidesToScroll: 7,
         });
+    });
 </script>
 @endsection

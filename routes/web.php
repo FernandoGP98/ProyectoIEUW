@@ -13,13 +13,16 @@ use App\Http\Controllers\likes;
 
 Route::get('/', [Routing::class, 'index']);
 Route::get('/redactar/noticia', [Routing::class, 'redactarNoticia']);
+Route::get('/editar/publicacion/{a}', [Routing::class, 'editarPublicacion']);
 Route::get('/redactar/reseña', [Routing::class, 'redactarReseña']);
 Route::get('/filtro/{a}', [Routing::class, 'filtro']);
 Route::get('/detalle/{a}/{b}', [Routing::class, 'detalle']);
 Route::get('/perfil', [Routing::class, 'perfil']);
 
-Route::resource('/noticia', noticia::class);
-Route::resource('/comentar', comentar::class);
-Route::resource('/like', likes::class);
+Route::post('/UsuarioUpdate', 'usuario@UsuarioUpdate');
+
+Route::resource('/noticia', 'noticia');
+Route::resource('/comentar', 'comentar');
+Route::resource('/like', 'likes');
 
 //Route::view('/', 'landing')->middleware('auth');
