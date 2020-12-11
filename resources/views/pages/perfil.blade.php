@@ -121,6 +121,31 @@
                 </div>
               </div>
               <div class="tab-pane fade ml-lg-4" id="list-publicaciones" role="tabpanel" aria-labelledby="list-publicaciones-list">
+                @if (Auth::user()->rol_id ==1)
+                    <div class="row"><h1 style="font-family: MetropolisBold" >Publicaciones</h1></div>
+                    <div class="row">
+                        <h3 style="font-family: MetropolisBold" >Pendientes de autores </h3>
+                        <div class="col-lg-12 misPublicaciones" id="pendientes">
+                        @foreach ($pendientes as $post)
+                            <div>
+                                <div class="reseña-item">
+                                    <a class="aPublicar" href="{{$post->id}}">
+                                        @if (!$post->noticia_reseña)
+                                            <img class="reseña-badge" width="60px" height="auto" src="\images\BADGES.png">
+                                        @endif
+                                        <img class="reseña-imagen" width="186px" height="270px" src="{{$post->imagen}}" alt="" srcset="">
+                                        <div class="overlay">
+                                            <div class="text">Publicar</div>
+                                        </div>
+                                        <input type="text" name="es" value="{{$post->noticia_reseña}}" hidden>
+                                    </a>
+                                </div>
+                                <p>{{$post->titulo}}</p>
+                            </div>
+                        @endforeach
+                        </div>
+                    </div>
+                @endif
                 <div class="row"><h1 style="font-family: MetropolisBold" >Mis publicaciones</h1></div>
                 <div class="row">
                     <h3 style="font-family: MetropolisBold" >Por publicar</h3>
@@ -145,7 +170,7 @@
                 </div>
                 <div class="row">
                     <h3 style="font-family: MetropolisBold" >Mis noticias</h3>
-                    <div class="col-lg-12 misPublicaciones">
+                    <div class="col-lg-12 misPublicaciones" id="noticias">
                         @foreach ($noticias as $post)
                             <div>
                                 <div class="reseña-item">
@@ -166,7 +191,7 @@
                 </div>
                 <div class="row">
                     <h3 style="font-family: MetropolisBold" >Mis reseñas</h3>
-                    <div class="col-lg-12 misPublicaciones">
+                    <div class="col-lg-12 misPublicaciones" id="reseñas">
                         @foreach ($reseñas as $post)
                             <div>
                                 <div class="reseña-item">
@@ -266,6 +291,87 @@
     $(document).ready(function(){
 
         var jq = jQuery.noConflict();
+        function pendientesInit() {
+            jq('#pendientes').slick({
+                speed: 1200,
+                autoplay:false,
+                slidesToShow: 4,
+                slidesToScroll: 4,
+            });
+        }
+        function pendientesDestroy() {
+            if ($('#pendientes').hasClass('slick-initialized')) {
+                jq('#pendientes').slick('destroy');
+            }
+        }
+        function slickCarousel() {
+            jq('.misPublicaciones').slick({
+                speed: 1200,
+                autoplay:false,
+                slidesToShow: 4,
+                slidesToScroll: 4,
+            });
+        }
+        function destroyCarousel() {
+            if ($('.misPublicaciones').hasClass('slick-initialized')) {
+                jq('.misPublicaciones').slick('unslick');
+            }
+        }
+
+        $('.aPublicar').click(function(e){
+            e.preventDefault();
+            var i = $(this).parent().parent().attr("data-slick-index");
+            var element = $(this).parent().parent();
+            /*var source = element.find('img.reseña-imagen').attr('src')
+            alert(source);
+            var titulo = element.parent().parent().find('p').text();
+            alert(titulo);
+            var es = element.find('input[type="text"]').val();
+            alert(es);*/
+            let _token   = $('meta[name="csrf-token"]').attr('content');
+            let postId = $(this).attr("href");
+            let path = "/noticia/"+postId+"/edit";
+            $.ajax({
+                url:path,
+                type:"GET",
+                data:{
+                    _token:_token,
+                    id:postId
+                },
+                success:function(response){
+                    if(response){
+                        toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": true,
+                        "progressBar": true,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                        }
+                        toastr.success('Publicacion publicada');
+                    }
+                    animateRemove(element, i);
+                }
+            });
+        });
+
+        function animateRemove(el, i) {
+            el.animate({height: '0px', width: '0px'}, 800, function(){
+                jq('#pendientes').slick('slickRemove', i);
+                pendientesDestroy()
+                pendientesInit()
+            });
+        }
+
         $('a[data-toggle="list"]').on('shown.bs.tab', function(e) {
             var s = jq($(this).attr('href')).find('.misPublicaciones');
             s.slick({

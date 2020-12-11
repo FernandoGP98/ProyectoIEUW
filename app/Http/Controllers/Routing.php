@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use App\Models\post;
 use App\Models\imagen;
+use App\Models\video;
 use App\Models\User;
 use App\Models\Like;
 use App\Models\categoria;
@@ -42,7 +43,11 @@ class Routing extends Controller
     }
     public function editarPublicacion($a){
         $post=post::find($a);
-        return view('pages.editarPublicacion')->with(compact('post'));
+
+        $imagenes = imagen::where('post_id', $a)->get();
+        $video = video::where('post_id', $a)->get();
+
+        return view('pages.editarPublicacion')->with(compact('post', 'imagenes', 'video'));
     }
 
     public function redactarReseña(){
@@ -56,11 +61,20 @@ class Routing extends Controller
 
         $noticias = post::select('posts.id', 'posts.titulo', 'imagens.imagen', 'posts.noticia_reseña')
         ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-        ->where('user_id', Auth::user()->id)->where('posts.noticia_reseña', 1)->groupBy('posts.id')->get();
+        ->where('user_id', Auth::user()->id)->where('publicado', 2)->where('posts.noticia_reseña', 1)->groupBy('posts.id')->get();
 
         $reseñas = post::select('posts.id', 'posts.titulo', 'imagens.imagen', 'posts.noticia_reseña')
         ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-        ->where('user_id', Auth::user()->id)->where('posts.noticia_reseña', 0)->groupBy('posts.id')->get();
+        ->where('user_id', Auth::user()->id)->where('publicado', 2)->where('posts.noticia_reseña', 0)->groupBy('posts.id')->get();
+
+        if (Auth::user()->rol_id==1) {
+            $pendientes = post::select('posts.id', 'posts.titulo', 'imagens.imagen', 'posts.noticia_reseña')
+            ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+            ->where('user_id', Auth::user()->id)->where('publicado', 1)->groupBy('posts.id')->get();
+
+            return view('pages.perfil')->with(compact('pp', 'noticias', 'reseñas', 'pendientes'));
+        }
+
         return view('pages.perfil')->with(compact('pp', 'noticias', 'reseñas'));
     }
 

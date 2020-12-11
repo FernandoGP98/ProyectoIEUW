@@ -15,7 +15,7 @@ class usuario extends Controller
         $usuario->email = $request->email;
 
         if($request->password!=null){
-            $usuario->password = $request->password;
+            $usuario->password = Hash::make($request->password);
         }
         if($request->hasFile('foto')){
             $imgName = time().'.'.$request->foto->getClientOriginalExtension();

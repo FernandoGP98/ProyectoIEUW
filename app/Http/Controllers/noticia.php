@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\post;
 use App\Models\imagen;
+use App\Models\comentario;
 use App\Models\video;
+use App\Models\like;
 
 class noticia extends Controller
 {
@@ -105,7 +107,10 @@ class noticia extends Controller
      */
     public function edit($id)
     {
-        //
+        $post=post::find($id);
+        $post->publicado = 2;
+        //$post->save();
+        return true;
     }
 
     /**
@@ -117,7 +122,58 @@ class noticia extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post=post::find($id);
+        $post->titulo = $request->titulo;
+        $post->descripcion = $request->descripcion;
+        $post->contenido = $request->noticia_contenido;
+        $post->fecha = $request->fecha;
+        $post->publicado = 1;
+        $post->categoria_id = $request->categoria;
+
+        if($post->save()){
+            if($request->imgE!=""){
+                $imgE = explode("|", $request->imgE);
+                //return $imgE[0];
+                $imagenes = imagen::where('post_id', $id)->get();
+                foreach ($imagenes as $item) {
+                    for ($i=0; $i < count($imgE); $i++) {
+                        if($item->id == $imgE[$i]){
+                            $item->delete();
+                        }
+                    }
+                }
+            }
+
+            $i=0;
+            if($request->hasFile('imagenes')){
+                foreach ($request->file('imagenes') as $imagen) {
+                    $img = new imagen;
+                    $imgName = time().$i.'.'.$imagen->getClientOriginalExtension();
+
+                    $imagen->move('images/', $imgName);
+                    $rute='/images/'.$imgName;
+                    $img->imagen=$rute;
+                    $img->post_id=$post->id;
+                    $img->save();
+                    $i++;
+                }
+            }
+
+            if($request->hasFile('video')){
+                video::where('post_id', $post->id)->delete();
+                $video = $request->file('video');
+                $vid = new video;
+                $vidName = time().'.'.$video->getClientOriginalExtension();
+
+                $video->move('videos/', $vidName);
+                $rute='/videos/'.$vidName;
+                $vid->video=$rute;
+                $vid->post_id=$post->id;
+                $vid->save();
+            }
+        }
+
+        return redirect()->back()->with('toastr', 1);
     }
 
     /**
@@ -128,6 +184,12 @@ class noticia extends Controller
      */
     public function destroy($id)
     {
-        //
+        imagen::where('post_id', $id)->delete();
+        video::where('post_id', $id)->delete();
+        comentario::where('post_id', $id)->delete();
+        like::where('post_id', $id)->delete();
+        $post = post::find($id);
+        $post->delete();
+        return redirect('/perfil');
     }
 }

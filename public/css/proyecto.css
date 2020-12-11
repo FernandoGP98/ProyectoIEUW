@@ -280,21 +280,24 @@ button[type=submit] i.fa-comment-dots:hover{
     color: whitesmoke;
 }
 
-.btn-submit#terminarNota,#guardarNota{
+.btn-submit#publicarNota,#guardarNota,#eliminarNota{
     font-family: MetropolisBold;
     font-size: 25px;
     border-radius: 50px;
     margin-top: 15px;
+
+    border: var(--color-texto-2) solid 5px;
+    color: var(--color-texto-2);
+    margin-left: 15px !important;
+}
+#publicarNota:hover,#guardarNota:hover,#eliminarNota:hover{
+    background-color: var(--color-texto-2);
+    color: white;
 }
 #terminarNota{
     background-color: var(--color-texto-2);
     color: white;
     margin-right: 15px !important;
-}
-#guardarNota{
-    border: var(--color-texto-2) solid 5px;
-    color: var(--color-texto-2);
-    margin-left: 15px !important;
 }
 .img-slide{
     height: 512px;
@@ -305,6 +308,7 @@ button[type=submit] i.fa-comment-dots:hover{
     font-family: MetropolisBold;
 }
 .toast-success{background: #1bb630;}
+.toast-error{background: var(--color-texto-2);}
 
 /*PERFIL*/
 .list-group-item.active{
@@ -347,4 +351,16 @@ button[type=submit] i.fa-comment-dots:hover{
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
+}
+/*EDITAR*/
+.imagenEliminar{
+    margin-top: 8px;
+    border: #212121 2px solid;
+    background-color: white;
+    font-family: Metropolis;
+}
+.imagenEliminar:hover{
+    background-color: var(--color-texto-2);
+    border: var(--color-texto-2) 2px solid;
+    color: white;
 }

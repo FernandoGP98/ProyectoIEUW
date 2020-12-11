@@ -89,6 +89,7 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('js/redactar.js') }}"></script>
     <script type="text/javascript">
         $(function() {
             $('.img-carousel').slick({
