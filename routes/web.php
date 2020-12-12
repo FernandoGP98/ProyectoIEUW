@@ -22,6 +22,9 @@ Route::post('/busqueda', [Routing::class, 'busqueda']);
 Route::post('/busquedaAvanzada', [Routing::class, 'busquedaAvanzada']);
 
 Route::post('/UsuarioUpdate', 'usuario@UsuarioUpdate');
+Route::post('/AutorRegistrar', 'usuario@AutorRegistrar');
+Route::post('/eliminarCuenta', 'usuario@eliminarCuenta');
+
 
 Route::resource('/noticia', 'noticia');
 Route::resource('/comentar', 'comentar');

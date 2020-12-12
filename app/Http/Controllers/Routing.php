@@ -72,7 +72,7 @@ class Routing extends Controller
         if (Auth::user()->rol_id==1) {
             $pendientes = post::select('posts.id', 'posts.titulo', 'imagens.imagen', 'posts.noticia_reseña')
             ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-            ->where('user_id', Auth::user()->id)->where('publicado', 1)->groupBy('posts.id')->get();
+            ->where('publicado', 1)->groupBy('posts.id')->get();
 
             return view('pages.perfil')->with(compact('pp', 'noticias', 'reseñas', 'pendientes'));
         }

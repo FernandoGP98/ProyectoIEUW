@@ -8,11 +8,20 @@
             </div>
             <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="list-perfil-list" data-toggle="list" href="#list-perfil" role="tab" aria-controls="perfil">Perfil</a>
+                @if (Auth::user()->rol_id!=3)
                 <a class="list-group-item list-group-item-action" id="list-publicaciones-list" data-toggle="list" href="#list-publicaciones" role="tab" aria-controls="publicaciones">Publicaciones</a>
+                @endif
                 @if (Auth::user()->rol_id==1)
                 <a class="list-group-item list-group-item-action" id="list-autores-list" data-toggle="list" href="#list-autores" role="tab" aria-controls="autores">Registrar autores</a>
                 @else
-                <a class="list-group-item list-group-item-action" id="list-eliminar-list" data-toggle="list" href="#list-eliminar" role="tab" aria-controls="eliminar">Eliminar cuenta</a>
+                <form action="/eliminarCuenta" method="post" id="eliminarCuentaForm">
+                    @csrf
+                    <a class="list-group-item list-group-item-action" id="list-eliminar-list" data-toggle="list" href="#list-eliminar" role="tab" aria-controls="eliminar"
+                    onclick="event.preventDefault();
+                    document.getElementById('eliminarCuentaForm').submit();">
+                        {{ __('Eliminar cuenta') }}
+                    </a>
+                </form>
                 @endif
                 <a id="list-sesion-list" class="list-group-item list-group-item-action" href="{{ route('logout') }}" data-toggle="list" role="tab"
                     onclick="event.preventDefault();
@@ -120,6 +129,7 @@
                     </div>
                 </div>
               </div>
+
               <div class="tab-pane fade ml-lg-4" id="list-publicaciones" role="tabpanel" aria-labelledby="list-publicaciones-list">
                 @if (Auth::user()->rol_id ==1)
                     <div class="row"><h1 style="font-family: MetropolisBold" >Publicaciones</h1></div>
@@ -211,18 +221,21 @@
                         </div>
                 </div>
               </div>
+
               <div class="tab-pane fade" id="list-autores" role="tabpanel" aria-labelledby="list-autores-list">
-                <div class="card login-reg">
+                <div class="card login-reg my-4">
                     <div class="card-header">{{ __('Registrar autores') }}</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="/AutorRegistrar" id="formAutor">
                             @csrf
 
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="nameAutor" type="text" class="form-control @error('name') is-invalid @enderror" name="nameAutor" value="{{ old('name') }}" autocomplete="name" autofocus>
+
+                                    <p class="perfilAlert mb-lg-0 mt-lg-2" id="nombreAlertAutor" style="display: none;">nombre mal</p>
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -236,8 +249,8 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Correo electronico') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
+                                    <input id="emailAutor" type="email" class="form-control @error('email') is-invalid @enderror" name="emailAutor" value="{{ old('email') }}" autocomplete="email">
+                                    <p class="perfilAlert mb-lg-0 mt-lg-2" id="emailAlertAutor" style="display: none;">nombre mal</p>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -247,11 +260,11 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Nueva contraseña') }}</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                                    <input id="passwordAutor" type="password" class="form-control @error('password') is-invalid @enderror" name="passwordAutor" autocomplete="new-password">
+                                    <p class="perfilAlert mb-lg-0 mt-lg-2" id="passAlertAutor" style="display: none;">nombre mal</p>
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -264,15 +277,15 @@
                                 <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar contraseña') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    <input id="password-confirmAutor" type="password" class="form-control" name="password_confirmationAutor" autocomplete="new-password">
                                 </div>
                             </div>
 
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn">
-                                        {{ __('Guardar') }}
+                                    <button id="submitAutor" type="submit" class="btn">
+                                        {{ __('Registrar') }}
                                     </button>
                                 </div>
                             </div>
@@ -287,159 +300,7 @@
 @endsection
 
 @section('scripts')
-<script>
-    $(document).ready(function(){
-
-        var jq = jQuery.noConflict();
-        function pendientesInit() {
-            jq('#pendientes').slick({
-                speed: 1200,
-                autoplay:false,
-                slidesToShow: 4,
-                slidesToScroll: 4,
-            });
-        }
-        function pendientesDestroy() {
-            if ($('#pendientes').hasClass('slick-initialized')) {
-                jq('#pendientes').slick('destroy');
-            }
-        }
-        function slickCarousel() {
-            jq('.misPublicaciones').slick({
-                speed: 1200,
-                autoplay:false,
-                slidesToShow: 4,
-                slidesToScroll: 4,
-            });
-        }
-        function destroyCarousel() {
-            if ($('.misPublicaciones').hasClass('slick-initialized')) {
-                jq('.misPublicaciones').slick('unslick');
-            }
-        }
-
-        $('.aPublicar').click(function(e){
-            e.preventDefault();
-            var i = $(this).parent().parent().attr("data-slick-index");
-            var element = $(this).parent().parent();
-            /*var source = element.find('img.reseña-imagen').attr('src')
-            alert(source);
-            var titulo = element.parent().parent().find('p').text();
-            alert(titulo);
-            var es = element.find('input[type="text"]').val();
-            alert(es);*/
-            let _token   = $('meta[name="csrf-token"]').attr('content');
-            let postId = $(this).attr("href");
-            let path = "/noticia/"+postId+"/edit";
-            $.ajax({
-                url:path,
-                type:"GET",
-                data:{
-                    _token:_token,
-                    id:postId
-                },
-                success:function(response){
-                    if(response){
-                        toastr.options = {
-                        "closeButton": true,
-                        "debug": false,
-                        "newestOnTop": true,
-                        "progressBar": true,
-                        "positionClass": "toast-bottom-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "300",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                        }
-                        toastr.success('Publicacion publicada');
-                    }
-                    animateRemove(element, i);
-                }
-            });
-        });
-
-        function animateRemove(el, i) {
-            el.animate({height: '0px', width: '0px'}, 800, function(){
-                jq('#pendientes').slick('slickRemove', i);
-                pendientesDestroy()
-                pendientesInit()
-            });
-        }
-
-        $('a[data-toggle="list"]').on('shown.bs.tab', function(e) {
-            var s = jq($(this).attr('href')).find('.misPublicaciones');
-            s.slick({
-                speed: 1200,
-                autoplay:false,
-                slidesToShow: 4,
-                slidesToScroll: 4,
-            })
-        });
-
-        $("#imgload").change(function () {
-            if (this.files && this.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#imgshow').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-            }
-        });
-
-        $('#perfilGuardar').click(function(e){
-            e.preventDefault();
-            var nombre = $("[name='name']").val();
-            var valid=true;
-            if(nombre==""){
-                valid = false;
-                $("#nombreAlert").text("Ingrese un nombre porfavor");
-                $("#nombreAlert").show();
-            }
-            var email = $("[name='email']").val();
-            if(email==""){
-                valid = false;
-                $("#mailAlert").text("Ingrese un correo porfavor");
-                $("#mailAlert").show();
-            }else if(!email.includes("@")){
-                valid = false;
-                $("#mailAlert").text("Ingrese un correo valido porfavor");
-                $("#mailAlert").show();
-            }
-            var passv1 = $("[name='password']").val();
-            var passv2 = $("[name='password_confirmation']").val();
-            var upperCase= new RegExp('[A-Z]');
-            var lowerCase= new RegExp('[a-z]');
-            var passSize=passv1.length;
-            if(passv1!=""){
-                if(passv2==""){
-                    valid = false;
-                    $("#passAlert").text("Ingrese ambas contraseñas");
-                    $("#passAlert").show();
-                }else if(passv1.match(upperCase) && passv1.match(lowerCase) && passSize>=8){
-                    if(passv1!=passv2){
-                        valid = false;
-                        $("#passAlert").text("Las contraseñas no coinciden");
-                        $("#passAlert").show();
-                    }
-                }else{
-                    valid = false;
-                    $("#passAlert").html("La contraseña debe tener mayusculas, minusculas y tener como minimo 8 digitos");
-                    $("#passAlert").show();
-                }
-            }
-
-            if(valid){
-                $('#formPerfil').submit();
-            }
-        });
-    });
-</script>
+<script src="/js/perfil.js"></script>
 @if (!empty(Session::get('toastr')))
     <script>
         $(document).ready(function(){

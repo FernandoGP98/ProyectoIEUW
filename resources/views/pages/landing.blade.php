@@ -27,7 +27,7 @@
         @foreach ($noticias as $item)
         <div class="card">
 
-            <a href="{{url('/detalle/noticia/'.$item->id)}}">
+            <a class="link_post" href="{{url('/detalle/noticia/'.$item->id)}}">
                 <img id class="imgPost card-img-top" src="{{$item->imagen}}" alt="Card image cap">
             </a>
             <div class="card-body">

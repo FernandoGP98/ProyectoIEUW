@@ -71,11 +71,11 @@
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item mx-3">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Inicias sesión') }}</a>
                         </li>
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link btn" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link btn" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                             </li>
                         @endif
                     @else
@@ -90,11 +90,11 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/perfil"> {{ __('Perfil') }}</a>
-                                @auth
+                                <a class="dropdown-item" href="/perfil" active> {{ __('Perfil') }}</a>
+                                @if (Auth::user()->rol_id<3)
                                 <a class="dropdown-item" href="/redactar/noticia"> {{ __('Redactar noticia') }}</a>
                                 <a class="dropdown-item" href="/redactar/reseña"> {{ __('Redactar reseña') }}</a>
-                                @endauth
+                                @endif
                                 <hr>
                                 <a id="logoff" class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -118,52 +118,18 @@
 
         <!-- Footer -->
     <footer style="background-color:white;" class="page-footer font-small blue pt-4">
-
-        <!-- Footer Links -->
         <div class="container-fluid text-center text-md-left">
-
-            <!-- Grid row -->
-            <div class="row">
-
-                <!-- Grid column -->
-                <div class="col-md-6 mt-md-0 mt-3">
-
-                    <!-- Content -->
-                    <h5 class="text-uppercase">Atomix</h5>
-                    <div class="">© 2018 Copyright:
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 mt-md-0 mt-3 mb-3">
+                    <h5 class="text-uppercase text-center">Atomix</h5>
+                    <div class="text-center">© 2018 Copyright:
                         <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
                     </div>
                 </div>
-                <!-- Grid column -->
-
-                <hr class="clearfix w-100 d-md-none pb-3">
-
-                <!-- Grid column -->
-                <div class="col-md-3 mb-md-0 mb-3">
-
-                    <!-- Links -->
-                    <div class="mb-3">
-                        <h5 class="">Vistanos en</h5>
-                        <img class="mr-3" src="/images/facebook.png" width="40px" height="auto" alt="">
-                        <img class="mr-3" src="/images/youtube.png" width="40px" height="auto" alt="">
-                        <img src="/images/twitter.png" width="40px" height="auto" alt="">
-                    </div>
-                    <div>Icons made by
-                        <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik
-                        </a> from
-                        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com
-                        </a>
-                    </div>
-
-                </div>
-
             </div>
-            <!-- Grid row -->
-
         </div>
-
     </footer>
-    <!-- Footer -->
+
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -176,7 +142,6 @@
     @yield('scripts')
     <script>
         $(document).ready(function(){
-
             $('i.submit').click(function(){
                 $('#form_busqueda').submit();
             });
