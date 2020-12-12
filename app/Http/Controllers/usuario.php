@@ -8,6 +8,7 @@ use App\Models\comentario;
 use App\Models\post;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class usuario extends Controller
 {
@@ -40,12 +41,16 @@ class usuario extends Controller
     }
 
     public function AutorRegistrar(Request $request){
+
         $autor = new User();
+
         $autor->name = $request->name;
         $autor->email = $request->email;
         $autor->password = Hash::make($request->password);
         $autor->rol_id=2;
+
         $autor->profile_photo_path = "/images/user-image.png";
+
         if($autor->save()){
             return true;
         }else{

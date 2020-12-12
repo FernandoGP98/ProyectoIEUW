@@ -29,12 +29,13 @@
 
                     </select>
                 </div>
-
-                <div class="noticia-fecha">
-                    <label for="pFecha"><h1>Fecha de acontecimiento</h1></label>
-                    <input class="form-control" style="display:block; width:100%;" type="date" name="fecha"
-                        id="pFecha" value="null">
-                </div>
+                @if (!$esReseña)
+                    <div class="noticia-fecha">
+                        <label for="pFecha"><h1>Fecha de acontecimiento</h1></label>
+                        <input class="form-control" style="display:block; width:100%;" type="date" name="fecha"
+                            id="pFecha" value="null">
+                    </div>
+                @endif
 
                 <div class="detalle-contenido my-lg-4">
                     <label for="noticia-contenido"><h1>Contenido</h1></label>
@@ -57,7 +58,7 @@
                     </div>
                 </div>
 
-                <div id="imagenes-input" hiddenclass="reseña-badge">
+                <div id="imagenes-input" hidden>
                     <small>Esto va HIDDEN al final, lo dejo por ahora, para asegurarme de que funciona</small>
                     <br>
                     Imagenes: <span id="contador">###</span>
@@ -81,9 +82,13 @@
                 </div>
 
                 <input type="text" value="{{Auth::user()->id}}" name="autor" hidden>
+                @if ($esReseña)
+                <input type="text" value="0" name="esNoticia" hidden>
+                @else
                 <input type="text" value="1" name="esNoticia" hidden>
+                @endif
                 <div class="text-center ">
-                    <input class="mb-2 btn btn-submit" type="submit" value="Publicar" id="guardarNota">
+                    <input class="mb-2 btn btn-submit" type="submit" value="Guardar" id="guardarNota">
                     <!--<input class="mb-2 btn btn-submit" type="submit" value="Guardar" id="guardarNota">-->
                 </div>
             </form>

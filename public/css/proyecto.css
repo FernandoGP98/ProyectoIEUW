@@ -385,3 +385,19 @@ button[type=submit] i.fa-comment-dots:hover{
     border: var(--color-texto-2) 2px solid;
     color: white;
 }
+.errorInput{
+    background-color:  #de004680;
+    color: white;
+}
+.errorInput:focus{
+    background-color:  #de004680;
+    color: white;
+}
+/*FILTRO*/
+li.active .page-link{
+    background-color: var(--color-texto-2) !important;
+    border-color: var(--color-texto-2) !important;
+}
+li .page-link{
+    color: #212121;
+}

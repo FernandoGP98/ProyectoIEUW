@@ -37,11 +37,15 @@ class Routing extends Controller
         ->selectRaw('posts.id,count(posts.id) as Total')
         ->join('comentarios', 'posts.id', '=', 'comentarios.post_id')->groupBy('posts.id')->get();
 
-        return view('pages.landing')->with(compact('noticias', 'reseñas', 'countC'));
+        $tags=post::select('titulo')->where('publicado', 2)->get();
+        $tags = $tags->toJson();
+
+        return view('pages.landing')->with(compact('noticias', 'reseñas', 'countC', 'tags'));
     }
 
     public function redactarNoticia(){
-        return view('pages.redactarNoticia');
+        $esReseña=false;
+        return view('pages.redactarNoticia')->with(compact('esReseña'));
     }
     public function editarPublicacion($a){
         $post=post::find($a);
@@ -53,21 +57,24 @@ class Routing extends Controller
     }
 
     public function redactarReseña(){
-        return view('pages.redactarReseña');
+        $esReseña=true;
+        return view('pages.redactarNoticia')->with(compact('esReseña'));
     }
 
     public function perfil(){
         $pp = post::select('posts.id', 'posts.titulo', 'imagens.imagen', 'posts.noticia_reseña')
         ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-        ->where('user_id', Auth::user()->id)->where('publicado', 0)->groupBy('posts.id')->get();
+        ->where('user_id', Auth::user()->id)->where('publicado','<', 2)->groupBy('posts.id')->get();
 
         $noticias = post::select('posts.id', 'posts.titulo', 'imagens.imagen', 'posts.noticia_reseña')
         ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-        ->where('user_id', Auth::user()->id)->where('publicado', 2)->where('posts.noticia_reseña', 1)->groupBy('posts.id')->get();
+        ->where('user_id', Auth::user()->id)->where('posts.noticia_reseña', 1)
+        ->where('publicado', 2)->groupBy('posts.id')->get();
 
         $reseñas = post::select('posts.id', 'posts.titulo', 'imagens.imagen', 'posts.noticia_reseña')
         ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-        ->where('user_id', Auth::user()->id)->where('publicado', 2)->where('posts.noticia_reseña', 0)->groupBy('posts.id')->get();
+        ->where('user_id', Auth::user()->id)->where('posts.noticia_reseña', 0);
+        $reseñas=$reseñas->where('publicado', 2)->groupBy('posts.id')->get();
 
         if (Auth::user()->rol_id==1) {
             $pendientes = post::select('posts.id', 'posts.titulo', 'imagens.imagen', 'posts.noticia_reseña')
@@ -88,9 +95,9 @@ class Routing extends Controller
                  'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
                 ->join('users', 'users.id', '=', 'posts.user_id')
                 ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-                ->where('posts.noticia_reseña', 1)->where('posts.publicado', 2)->orderBy('posts.fecha')->groupBy('posts.id');
+                ->where('posts.noticia_reseña', 1)->where('posts.publicado', 2)->orderBy('posts.fecha', 'desc')->groupBy('posts.id');
 
-                $noticias=$noticias->paginate(5);
+                $noticias=$noticias->paginate(3);
 
                 $countC = DB::table('posts')
                 ->selectRaw('posts.id,count(posts.id) as Total')
@@ -110,7 +117,7 @@ class Routing extends Controller
                 ->join('imagens', 'imagens.post_id', '=', 'posts.id')
                 ->where('posts.noticia_reseña', 0)->where('posts.publicado', 2)->orderBy('posts.fecha')->groupBy('posts.id');
 
-                $noticias=$noticias->paginate(5);
+                $noticias=$noticias->paginate(3);
 
                 $header="RESEÑAS";
 
@@ -130,7 +137,7 @@ class Routing extends Controller
                 ->join('imagens', 'imagens.post_id', '=', 'posts.id')
                 ->where('posts.categoria_id', 1)->where('posts.publicado', 2)->orderBy('posts.fecha')->groupBy('posts.id');
 
-                $noticias=$noticias->paginate(5);
+                $noticias=$noticias->paginate(3);
 
                 $header="NINTENDO";
 
@@ -150,7 +157,7 @@ class Routing extends Controller
                 ->join('imagens', 'imagens.post_id', '=', 'posts.id')
                 ->where('posts.categoria_id', 2)->where('posts.publicado', 2)->orderBy('posts.fecha')->groupBy('posts.id');
 
-                $noticias=$noticias->paginate(5);
+                $noticias=$noticias->paginate(3);
 
                 $header="SONY";
 
@@ -170,7 +177,7 @@ class Routing extends Controller
                 ->join('imagens', 'imagens.post_id', '=', 'posts.id')
                 ->where('posts.categoria_id', 3)->where('posts.publicado', 2)->orderBy('posts.fecha')->groupBy('posts.id');
 
-                $noticias=$noticias->paginate(5);
+                $noticias=$noticias->paginate(3);
 
                 $header="XBOX";
 
@@ -238,7 +245,7 @@ class Routing extends Controller
             ->orderBy('posts.fecha')->groupBy('posts.id');
         }
 
-        $noticias = $noticias->paginate(5);
+        $noticias = $noticias->paginate(50);
 
         $header = "Publicaciones";
 
@@ -328,7 +335,7 @@ class Routing extends Controller
             }
         }
 
-        $noticias = $noticias->paginate(5);
+        $noticias = $noticias->paginate(50);
 
         $header = "Publicaciones";
 

@@ -71,9 +71,9 @@
                     </div>
                 </div>
 
-                <input id="imgAEliminar" type='text' name="imgE" value="">
+                <input id="imgAEliminar" type='text' name="imgE" value="" hidden>
 
-                <div id="imagenes-input" hiddenclass="reseña-badge">
+                <div id="imagenes-input" hidden>
                     <small>Esto va HIDDEN al final, lo dejo por ahora, para asegurarme de que funciona</small>
                     <br>
                     Imagenes: <span id="contador">###</span>

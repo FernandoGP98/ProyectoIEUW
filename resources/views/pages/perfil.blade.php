@@ -11,9 +11,16 @@
                 @if (Auth::user()->rol_id!=3)
                 <a class="list-group-item list-group-item-action" id="list-publicaciones-list" data-toggle="list" href="#list-publicaciones" role="tab" aria-controls="publicaciones">Publicaciones</a>
                 @endif
+                <a id="list-sesion-list" class="list-group-item list-group-item-action" href="{{ route('logout') }}" data-toggle="list" role="tab"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    {{ __('Cerrar sesion') }}
+                </a>
                 @if (Auth::user()->rol_id==1)
+                <hr>
                 <a class="list-group-item list-group-item-action" id="list-autores-list" data-toggle="list" href="#list-autores" role="tab" aria-controls="autores">Registrar autores</a>
                 @else
+                <hr>
                 <form action="/eliminarCuenta" method="post" id="eliminarCuentaForm">
                     @csrf
                     <a class="list-group-item list-group-item-action" id="list-eliminar-list" data-toggle="list" href="#list-eliminar" role="tab" aria-controls="eliminar"
@@ -23,11 +30,6 @@
                     </a>
                 </form>
                 @endif
-                <a id="list-sesion-list" class="list-group-item list-group-item-action" href="{{ route('logout') }}" data-toggle="list" role="tab"
-                    onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                    {{ __('Cerrar sesion') }}
-                </a>
             </div>
         </div>
 
@@ -205,7 +207,7 @@
                         @foreach ($reseñas as $post)
                             <div>
                                 <div class="reseña-item">
-                                    <a href="{{url('detalle/publicacion/'.$post->id)}}">
+                                    <a href="{{url('editar/publicacion/'.$post->id)}}">
                                         @if (!$post->noticia_reseña)
                                             <img class="reseña-badge" width="60px" height="auto" src="\images\BADGES.png">
                                         @endif

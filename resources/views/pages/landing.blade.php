@@ -57,6 +57,21 @@
 @section('scripts')
 <script>
     $(document).ready(function(){
+
+        $( function() {
+            var availableTags= [
+            "Review"
+            ];
+            //alert({{$tags}});
+            var noticias =JSON.parse('{{$tags}}'.replace(/&quot;/g, '"'));
+            for (let index = 0; index < Object.keys(noticias).length; index++) {
+                availableTags.push(noticias[index].titulo);
+            }
+            $( "#search-box" ).autocomplete({
+            source: availableTags
+            });
+        });
+
         $('.SliderReseñas').slick({
             speed: 1200,
             autoplay:false,

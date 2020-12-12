@@ -152,20 +152,33 @@ $(document).ready(function(){
 
     $('#submitAutor').click(function(e){
         e.preventDefault();
+
+        $("#nombreAlertAutor").hide();
+        $("#emailAlertAutor").hide();
+        $("#passAlertAutor").hide();
+
+        $("[name='nameAutor']").removeClass('errorInput');
+        $("[name='emailAutor']").removeClass('errorInput');
+        $("[name='passwordAutor']").removeClass('errorInput');
+        $("[name='password_confirmationAutor']").removeClass('errorInput');
+
         var nombre = $("[name='nameAutor']").val();
         var valid=true;
         if(nombre==""){
             valid = false;
+            $("[name='nameAutor']").addClass('errorInput');
             $("#nombreAlertAutor").text("Ingrese un nombre porfavor");
             $("#nombreAlertAutor").show();
         }
         var email = $("[name='emailAutor']").val();
         if(email==""){
             valid = false;
+            $("[name='emailAutor']").addClass('errorInput');
             $("#emailAlertAutor").text("Ingrese un correo porfavor");
             $("#emailAlertAutor").show();
         }else if(!email.includes("@")){
             valid = false;
+            $("[name='emailAutor']").addClass('errorInput');
             $("#emailAlertAutor").text("Ingrese un correo valido porfavor");
             $("#emailAlertAutor").show();
         }
@@ -177,27 +190,33 @@ $(document).ready(function(){
         if(passv1!=""){
             if(passv2==""){
                 valid = false;
+                $("[name='passwordAutor']").addClass('errorInput');
+                $("[name='password_confirmationAutor']").addClass('errorInput');
                 $("#passAlertAutor").text("Ingrese ambas contraseñas");
                 $("#passAlertAutor").show();
             }else if(passv1.match(upperCase) && passv1.match(lowerCase) && passSize>=8){
                 if(passv1!=passv2){
                     valid = false;
+                    $("[name='passwordAutor']").addClass('errorInput');
+                    $("[name='password_confirmationAutor']").addClass('errorInput');
                     $("#passAlertAutor").text("Las contraseñas no coinciden");
                     $("#passAlertAutor").show();
                 }
             }else{
                 valid = false;
+                $("[name='passwordAutor']").addClass('errorInput');
                 $("#passAlertAutor").html("La contraseña debe tener mayusculas, minusculas y minimo 8 caracteres");
                 $("#passAlertAutor").show();
             }
         }else{
             valid = false;
+            $("[name='passwordAutor']").addClass('errorInput');
             $("#passAlertAutor").text("Ingrese una contraseña");
             $("#passAlertAutor").show();
         }
 
         if(valid){
-            //$('#formAutor').submit();
+            $('#formAutor').submit();
             let _token = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 url:"/AutorRegistrar",

@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use App\Notifications\BienvenidoEmail;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Bienvenido;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -32,12 +35,18 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
             'rol_id' => 3,
             'profile_photo_path'=>'/images/user-image.png',
         ]);
+
+        //$user->notify(new BienvenidoEmail());
+
+        Mail::to($user->email)->send(new Bienvenido($user));
+
+        return $user;
     }
 }

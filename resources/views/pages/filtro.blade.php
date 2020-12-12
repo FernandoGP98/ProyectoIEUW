@@ -66,7 +66,6 @@
         $i++;
     @endphp
     @endforeach
-
     <div class="d-flex justify-content-center">
         {!! $noticias->links("pagination::bootstrap-4") !!}
     </div>

@@ -100,12 +100,14 @@ $(document).ready(function(){
         var titulo = $("[name='titulo']").val();
         if(titulo==""){
             valid = false;
+            $("[name='titulo']").addClass('errorInput');
             $("#tituloAlert").text("Ingrese un título, por favor");
             $("#tituloAlert").show();
         }
         var descripcion = $("[name='descripcion']").val();
         if(descripcion==""){
             valid = false;
+            $("[name='descripcion']").addClass('errorInput');
             $("#descripcionAlert").text("Ingrese una descripción, por favor");
             $("#descripcionAlert").show();
         }
@@ -113,6 +115,7 @@ $(document).ready(function(){
         console.log(contenido);
         if(contenido==""){
             valid = false;
+            $("[name='noticia-contenido']").addClass('errorInput');
             $("#contenidoAlert").text("Ingrese el contenido de la nota, por favor");
             $("#contenidoAlert").show();
         }
