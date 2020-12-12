@@ -19,7 +19,7 @@ Route::get('/filtro/{a}', [Routing::class, 'filtro']);
 Route::get('/detalle/{a}/{b}', [Routing::class, 'detalle']);
 Route::get('/perfil', [Routing::class, 'perfil']);
 Route::post('/busqueda', [Routing::class, 'busqueda']);
-Route::post('/busquedaAvanzada', [Routing::class, 'busquedaAvenzada']);
+Route::post('/busquedaAvanzada', [Routing::class, 'busquedaAvanzada']);
 
 Route::post('/UsuarioUpdate', 'usuario@UsuarioUpdate');
 

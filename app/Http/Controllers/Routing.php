@@ -88,7 +88,7 @@ class Routing extends Controller
                  'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
                 ->join('users', 'users.id', '=', 'posts.user_id')
                 ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-                ->where('posts.noticia_reseña', 1)->orderBy('posts.fecha')->groupBy('posts.id');
+                ->where('posts.noticia_reseña', 1)->where('posts.publicado', 2)->orderBy('posts.fecha')->groupBy('posts.id');
 
                 $noticias=$noticias->paginate(5);
 
@@ -108,7 +108,7 @@ class Routing extends Controller
                  'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
                 ->join('users', 'users.id', '=', 'posts.user_id')
                 ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-                ->where('posts.noticia_reseña', 0)->orderBy('posts.fecha')->groupBy('posts.id');
+                ->where('posts.noticia_reseña', 0)->where('posts.publicado', 2)->orderBy('posts.fecha')->groupBy('posts.id');
 
                 $noticias=$noticias->paginate(5);
 
@@ -128,7 +128,7 @@ class Routing extends Controller
                  'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
                 ->join('users', 'users.id', '=', 'posts.user_id')
                 ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-                ->where('posts.categoria_id', 1)->orderBy('posts.fecha')->groupBy('posts.id');
+                ->where('posts.categoria_id', 1)->where('posts.publicado', 2)->orderBy('posts.fecha')->groupBy('posts.id');
 
                 $noticias=$noticias->paginate(5);
 
@@ -148,7 +148,7 @@ class Routing extends Controller
                  'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
                 ->join('users', 'users.id', '=', 'posts.user_id')
                 ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-                ->where('posts.categoria_id', 2)->orderBy('posts.fecha')->groupBy('posts.id');
+                ->where('posts.categoria_id', 2)->where('posts.publicado', 2)->orderBy('posts.fecha')->groupBy('posts.id');
 
                 $noticias=$noticias->paginate(5);
 
@@ -168,7 +168,7 @@ class Routing extends Controller
                  'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
                 ->join('users', 'users.id', '=', 'posts.user_id')
                 ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-                ->where('posts.categoria_id', 3)->orderBy('posts.fecha')->groupBy('posts.id');
+                ->where('posts.categoria_id', 3)->where('posts.publicado', 2)->orderBy('posts.fecha')->groupBy('posts.id');
 
                 $noticias=$noticias->paginate(5);
 
@@ -254,6 +254,7 @@ class Routing extends Controller
         $esSearch=1;
         if($request->search!=""){
             if($request->from !="" && $request->to != ""){
+
                 $from = date($request->from);
                 $to = date($request->to);
                 $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
@@ -262,29 +263,69 @@ class Routing extends Controller
                 ->join('imagens', 'imagens.post_id', '=', 'posts.id')
                 ->where('publicado', 2)->where('titulo', 'like', '%'.$request->search.'%')->whereBetween('fecha', [$from, $to])
                 ->orderBy('posts.fecha')->groupBy('posts.id');
-            }else{
+            }else if($request->from !="" || $request->to != ""){
+                if($request->from !=""){
+
+                    $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
+                    'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
+                    ->join('users', 'users.id', '=', 'posts.user_id')
+                    ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+                    ->where('publicado', 2)->where('titulo', 'like', '%'.$request->search.'%')->where('fecha','>', $request->from)
+                    ->orderBy('posts.fecha')->groupBy('posts.id');
+                }
+                if($request->to !=""){
+
+                    $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
+                    'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
+                    ->join('users', 'users.id', '=', 'posts.user_id')
+                    ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+                    ->where('publicado', 2)->where('titulo', 'like', '%'.$request->search.'%')->where('fecha','<', $request->to)
+                    ->orderBy('posts.fecha')->groupBy('posts.id');
+                }
+            }else if($request->from =="" && $request->to == ""){
+
+                $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
+                'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
+                ->join('users', 'users.id', '=', 'posts.user_id')
+                ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+                ->where('publicado', 2)->where('titulo', 'like', '%'.$request->search.'%')
+                ->orderBy('posts.fecha')->groupBy('posts.id');
+            }
+        }else{
+            if($request->from !="" && $request->to != ""){
+                $from = date($request->from);
+                $to = date($request->to);
+                $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
+                'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
+                ->join('users', 'users.id', '=', 'posts.user_id')
+                ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+                ->where('publicado', 2)->whereBetween('fecha', [$from, $to])
+                ->orderBy('posts.fecha')->groupBy('posts.id');
+            }else if($request->from !="" || $request->to != ""){
                 if($request->from !=""){
                     $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
                     'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
                     ->join('users', 'users.id', '=', 'posts.user_id')
                     ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-                    ->where('publicado', 2)->where('titulo', 'like', '%'.$request->search.'%')->where('fecha', [$from, $to])
+                    ->where('publicado', 2)->where('fecha','>', $request->from)
                     ->orderBy('posts.fecha')->groupBy('posts.id');
                 }
+                if($request->to !=""){
+                    $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
+                    'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
+                    ->join('users', 'users.id', '=', 'posts.user_id')
+                    ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+                    ->where('publicado', 2)->where('fecha','<', $request->to)
+                    ->orderBy('posts.fecha')->groupBy('posts.id');
+                }
+            }else if($request->from =="" && $request->to == ""){
+                $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
+                'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
+                ->join('users', 'users.id', '=', 'posts.user_id')
+                ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+                ->where('publicado', 2)
+                ->orderBy('posts.fecha')->groupBy('posts.id');
             }
-            $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
-            'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
-            ->join('users', 'users.id', '=', 'posts.user_id')
-            ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-            ->where('publicado', 2)->where('titulo', 'like', '%'.$request->search.'%')
-            ->orderBy('posts.fecha')->groupBy('posts.id');
-        }else{
-            $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
-            'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
-            ->join('users', 'users.id', '=', 'posts.user_id')
-            ->join('imagens', 'imagens.post_id', '=', 'posts.id')
-            ->where('publicado', 2)
-            ->orderBy('posts.fecha')->groupBy('posts.id');
         }
 
         $noticias = $noticias->paginate(5);

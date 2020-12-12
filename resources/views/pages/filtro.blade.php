@@ -75,7 +75,7 @@
 @section('scripts')
     <script>
         $(document).ready(function(){
-            $('submitAvanzado').click(function(){
+            $('.submitAvanzado').click(function(){
                 $('#busquedaAvanzada').submit();
             });
         });
