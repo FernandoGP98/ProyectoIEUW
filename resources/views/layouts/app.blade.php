@@ -35,11 +35,11 @@
                 <a class="navbar-brand navbar-collapse collapse navbarSupportedContent" href="{{ url('/') }}">
                     <img src="/images/logo.png" alt="" srcset="" width="115px" height="auto">
                 </a>
-                <form class="form-inline my-2 my-lg-0 mx-1" method="post" action="/busqueda">
+                <form class="form-inline my-2 my-lg-0 mx-1" method="post" action="/busqueda" id="form_busqueda">
                     @csrf
                     <input class="form-control mr-sm-2" style="border-radius: 20px;" id="search-box" name="search" type="search"
                         placeholder="Busca en Atomix" aria-label="Search">
-                        <i class="btn fas fa-search"></i>
+                        <i class="submit fas fa-search"></i>
                 </form>
             </div>
             <div class="mt-2 collapse navbar-collapse position-absolute order-1 navbarSupportedContent">
@@ -112,7 +112,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
 
@@ -175,9 +175,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     @yield('scripts')
     <script>
-        tinymce.init({
-            selector: '#noticia-contenido',
-            height : "480",
+        $(document).ready(function(){
+
+            $('i.submit').click(function(){
+                $('#form_busqueda').submit();
+            });
+
+            tinymce.init({
+                selector: '#noticia-contenido',
+                height : "480",
+            });
         });
     </script>
 </body>

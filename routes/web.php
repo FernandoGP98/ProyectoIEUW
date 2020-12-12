@@ -18,6 +18,8 @@ Route::get('/redactar/reseña', [Routing::class, 'redactarReseña']);
 Route::get('/filtro/{a}', [Routing::class, 'filtro']);
 Route::get('/detalle/{a}/{b}', [Routing::class, 'detalle']);
 Route::get('/perfil', [Routing::class, 'perfil']);
+Route::post('/busqueda', [Routing::class, 'busqueda']);
+Route::post('/busquedaAvanzada', [Routing::class, 'busquedaAvenzada']);
 
 Route::post('/UsuarioUpdate', 'usuario@UsuarioUpdate');
 

@@ -1,5 +1,6 @@
 $(document).ready(function(){
     console.log(imagen);
+    $('#contador').text(imagen);
     var clone22;
 
     $("#descripcion").on("input", function(){
@@ -117,7 +118,7 @@ $(document).ready(function(){
         }
         var contImagenes = $('#contador').text();
         console.log(contImagenes);
-        if(contImagenes=="0"){
+        if(contImagenes=="0"||contImagenes=="###"){
             valid = false;
             $("#imagenAlert").text("Ingrese al menos una imagen");
             $("#imagenAlert").show();

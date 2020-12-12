@@ -1,6 +1,34 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+    @isset($esSearch)
+        <div class="row mt-3">
+            <div class="col-lg-12">
+                <form action="/busquedaAvanzada" method="post" id="busquedaAvanzada">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-11">
+                            <input class="mr-sm-2 form-control-lg" style="border-radius: 5px; width:100%; height:100%;" id="search-box" name="search" type="search"
+                            placeholder="Busca en Atomix" aria-label="Search">
+                        </div>
+                        <div class="col-lg-1">
+                            <i style="color: white" class="submitAvanzado fas fa-search fa-3x"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 ">
+                            <h4 class="mb-0 mt-3" style="color: white;">DE:</h4>
+                            <input class="form-control" type="date" name="from" id="">
+                        </div>
+                        <div class="col-lg-6">
+                            <h4 class="mb-0 mt-3" style="color: white;">A:</h4>
+                            <input class="form-control" type="date" name="to" id="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endisset
     <h1 class="titulo-seccion">{{$header}}</h1>
     <div class="d-flex justify-content-center">
         {!! $noticias->links("pagination::bootstrap-4") !!}
@@ -43,4 +71,13 @@
         {!! $noticias->links("pagination::bootstrap-4") !!}
     </div>
 </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            $('submitAvanzado').click(function(){
+                $('#busquedaAvanzada').submit();
+            });
+        });
+    </script>
 @endsection

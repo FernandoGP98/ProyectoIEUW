@@ -22,13 +22,15 @@ class Routing extends Controller
          'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen', 'categorias.titulo as categoria')
         ->join('users', 'users.id', '=', 'posts.user_id')
         ->join('categorias', 'categorias.id', '=', 'posts.categoria_id')
-        ->join('imagens', 'imagens.post_id', '=', 'posts.id')->where('posts.noticia_reseña', 1)->groupBy('posts.id');
+        ->join('imagens', 'imagens.post_id', '=', 'posts.id')->where('posts.noticia_reseña', 1)
+        ->where('publicado', 2)->groupBy('posts.id');
 
         $noticias = $noticias->orderBy('fecha', 'desc')->get();
 
         $reseñas = DB::table('posts')
         ->select('posts.id as id','posts.titulo as titulo','imagens.imagen as imagen')
-        ->join('imagens', 'imagens.post_id', '=', 'posts.id')->where('posts.noticia_reseña', 0)->groupBy('posts.id')
+        ->join('imagens', 'imagens.post_id', '=', 'posts.id')->where('posts.noticia_reseña', 0)
+        ->where('publicado', 2)->groupBy('posts.id')
         ->get();
 
         $countC = DB::table('posts')
@@ -175,7 +177,7 @@ class Routing extends Controller
                 $countC = DB::table('posts')
                 ->selectRaw('posts.id,count(posts.id) as Total')
                 ->join('comentarios', 'posts.id', '=', 'comentarios.post_id')
-                ->where('posts.noticia_reseña', 0)
+                ->where('posts.noticia_reseña', 2)
                 ->groupBy('posts.id')->get();
 
                 return view('pages.filtro')->with(compact('noticias', 'countC', 'header'));
@@ -191,6 +193,7 @@ class Routing extends Controller
         $categoria = categoria::find($noticia->categoria_id);
 
         $imagenes = imagen::where('post_id', $b)->get();
+        $video = video::where('post_id', $b)->get();
 
         $hasLike=false;
         $conteo=0;
@@ -214,6 +217,85 @@ class Routing extends Controller
         $cComentario = $comentarios->count();
 
         return view('pages.detalle')->with(compact('noticia', 'autor', 'imagenes', 'comentarios',
-        'cComentario', 'hasLike', 'conteo', 'categoria'));
+        'cComentario', 'hasLike', 'conteo', 'categoria', 'video'));
+    }
+
+    public function busqueda(Request $request){
+        $esSearch=1;
+        if($request->search!=""){
+            $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
+            'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
+            ->join('users', 'users.id', '=', 'posts.user_id')
+            ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+            ->where('publicado', 2)->where('titulo', 'like', '%'.$request->search.'%')
+            ->orderBy('posts.fecha')->groupBy('posts.id');
+        }else{
+            $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
+            'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
+            ->join('users', 'users.id', '=', 'posts.user_id')
+            ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+            ->where('publicado', 2)
+            ->orderBy('posts.fecha')->groupBy('posts.id');
+        }
+
+        $noticias = $noticias->paginate(5);
+
+        $header = "Publicaciones";
+
+        $countC = DB::table('posts')
+                ->selectRaw('posts.id,count(posts.id) as Total')
+                ->join('comentarios', 'posts.id', '=', 'comentarios.post_id')
+                ->where('posts.publicado', 2)
+                ->groupBy('posts.id')->get();
+        return view('pages.filtro')->with(compact('noticias', 'header', 'countC', 'esSearch'));
+    }
+
+    public function busquedaAvanzada(Request $request){
+        $esSearch=1;
+        if($request->search!=""){
+            if($request->from !="" && $request->to != ""){
+                $from = date($request->from);
+                $to = date($request->to);
+                $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
+                'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
+                ->join('users', 'users.id', '=', 'posts.user_id')
+                ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+                ->where('publicado', 2)->where('titulo', 'like', '%'.$request->search.'%')->whereBetween('fecha', [$from, $to])
+                ->orderBy('posts.fecha')->groupBy('posts.id');
+            }else{
+                if($request->from !=""){
+                    $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
+                    'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
+                    ->join('users', 'users.id', '=', 'posts.user_id')
+                    ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+                    ->where('publicado', 2)->where('titulo', 'like', '%'.$request->search.'%')->where('fecha', [$from, $to])
+                    ->orderBy('posts.fecha')->groupBy('posts.id');
+                }
+            }
+            $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
+            'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
+            ->join('users', 'users.id', '=', 'posts.user_id')
+            ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+            ->where('publicado', 2)->where('titulo', 'like', '%'.$request->search.'%')
+            ->orderBy('posts.fecha')->groupBy('posts.id');
+        }else{
+            $noticias = post::select('posts.id as id','posts.titulo as titulo', 'posts.descripcion as descripcion',
+            'posts.fecha as fecha', 'users.name as autor','imagens.imagen as imagen')
+            ->join('users', 'users.id', '=', 'posts.user_id')
+            ->join('imagens', 'imagens.post_id', '=', 'posts.id')
+            ->where('publicado', 2)
+            ->orderBy('posts.fecha')->groupBy('posts.id');
+        }
+
+        $noticias = $noticias->paginate(5);
+
+        $header = "Publicaciones";
+
+        $countC = DB::table('posts')
+                ->selectRaw('posts.id,count(posts.id) as Total')
+                ->join('comentarios', 'posts.id', '=', 'comentarios.post_id')
+                ->where('posts.publicado', 2)
+                ->groupBy('posts.id')->get();
+        return view('pages.filtro')->with(compact('noticias', 'header', 'countC', 'esSearch'));
     }
 }

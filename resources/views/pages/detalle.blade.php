@@ -23,8 +23,14 @@
             <div class="detalle-contenido my-lg-4">
                 <?= $noticia->contenido ?>
             </div>
+            <div>
+                <video width="100%" height="512px" controls>
+                    <source src="{{$video[0]->video}}" id="video_here">
+                        Your browser does not support HTML5 video.
+                </video>
+            </div>
             <div >
-                <h2 style="display:inline; font-family: MetropolisBold;">Seccion: </h2>
+                <h2 style="display:inline; font-family: MetropolisBold;">Sección: </h2>
                 <a href="{{url('/filtro/'.$categoria->titulo)}}"><h4 style="display:inline;"><span class="categoria">{{$categoria->titulo}}</span></h4></a>
             </div>
             @auth
@@ -71,7 +77,7 @@
                         </div>
 
                         <div class="col-lg-10">
-                            <input class="w-100 form-control-lg" type="text" name="comentario" id="comentario" placeholder="Unete a la discusion...">
+                            <input class="w-100 form-control-lg" type="text" name="comentario" id="comentario" placeholder="Únete a la discusión...">
                         </div>
                         <div class="col-lg-1 ">
                             <button class="btn px-lg-0" type="submit" id="comentar"><i class="fas fa-comment-dots fa-3x"></i></button>

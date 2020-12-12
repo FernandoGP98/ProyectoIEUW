@@ -35,11 +35,13 @@
                     </select>
                 </div>
 
-                <div class="noticia-fecha">
-                    <label for="pFecha"><h1>Fecha de acontecimiento</h1></label>
-                    <input class="form-control" style="display:block; width:100%;" type="date" name="fecha"
-                id="pFecha" value="{{$post->fecha}}">
-                </div>
+                @if ($post->noticia_reseña)
+                    <div class="noticia-fecha">
+                        <label for="pFecha"><h1>Fecha de acontecimiento</h1></label>
+                        <input class="form-control" style="display:block; width:100%;" type="date" name="fecha"
+                    id="pFecha" value="{{$post->fecha}}">
+                    </div>
+                @endif
 
                 <div class="detalle-contenido my-lg-4">
                     <label for="noticia-contenido"><h1>Contenido</h1></label>
@@ -145,7 +147,7 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
             }
-            toastr.success('Publicacion guardada, revise su perfil');
+            toastr.success('Publicación guardada, revisé su perfil');
         });
 
     </script>

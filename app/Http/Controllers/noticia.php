@@ -109,7 +109,7 @@ class noticia extends Controller
     {
         $post=post::find($id);
         $post->publicado = 2;
-        //$post->save();
+        $post->save();
         return true;
     }
 

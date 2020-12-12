@@ -59,6 +59,9 @@ body{
 a{
     text-decoration: none !important;
 }
+i.submit:hover{
+    cursor: pointer;
+}
 .navbar-foto{
     border-radius:50%;
     object-fit: cover;
@@ -73,9 +76,22 @@ a{
 
 }
 /*LANDING*/
+.reseñas-contenedor{
+    background-color: #000000;
+    color: #ffffff;
+}
+.reseñas-contenedor h1{
+    font-family: MetropolisBold;
+    margin-top: 15px;
+}
+.row.no-gutters h1.container{
+    font-family: MetropolisBold;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
 .SliderReseñas{
     display: none;
-  }
+}
 .SliderReseñas.slick-initialized{
     display: block;
 }
@@ -206,6 +222,8 @@ a{
     font-family: MetropolisBold;
     color:#ffffff;
     text-transform: uppercase;
+    margin-top: 25px;
+    margin-bottom: 8px;
 }
 .page-item .page-link.active{
     background-color: var(--color-texto-2);

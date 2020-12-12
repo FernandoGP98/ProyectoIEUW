@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="row no-gutters">
+<div class="row no-gutters mb-4 reseñas-contenedor">
+    <h1 class="container">Reseñas</h1>
     <div class="col-md-12 pt-0 SliderReseñas">
         @foreach ($reseñas as $res)
             <div>
@@ -17,7 +18,11 @@
     </div>
 </div>
 
+<div class="row no-gutters">
+    <h1 class="container" >Noticias</h1>
+</div>
 <div class="row no-gutters d-flex justify-content-center">
+
     <div class="col-md-9">
         @foreach ($noticias as $item)
         <div class="card">

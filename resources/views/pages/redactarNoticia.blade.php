@@ -7,7 +7,8 @@
                 @csrf
                 <div class="noticia-titulo">
                     <label for="titulo"><h1>Titulo</h1></label>
-                <input style="text-transform: uppercase;" class="w-100 form-control" type="text" name="titulo" id="titulo">
+                    <input style="text-transform: uppercase;" class="w-100 form-control" type="text" name="titulo" id="titulo">
+                    <p class="perfilAlert mb-lg-0 mt-lg-2 ml-lg-3" id="tituloAlert" style="display: none;">nombre mal</p>
                 </div>
 
                 <div class="noticia-descripcion">
@@ -15,6 +16,7 @@
                     <textarea class="form-control w-100" name="descripcion" id="descripcion"
                     cols="30" rows="5" maxlength="255"></textarea>
                     <p id="Crestantes">255</p>
+                    <p class="perfilAlert mb-lg-0 mt-lg-2 ml-lg-3" id="descripcionAlert" style="display: none;">nombre mal</p>
                 </div>
 
                 <div class="noticia-categoria">
@@ -37,11 +39,12 @@
                 <div class="detalle-contenido my-lg-4">
                     <label for="noticia-contenido"><h1>Contenido</h1></label>
                     <textarea class="form-control" name="noticia_contenido" id="noticia-contenido"></textarea>
+                    <p class="perfilAlert mb-lg-0 mt-lg-2 ml-lg-3" id="contenidoAlert" style="display: none;">nombre mal</p>
                 </div>
 
                 <div class="contenedor-imagenes" style="width: 100%;">
                     <label for="multimedia"><h1>Imagenes</h1></label>
-
+                    <p class="perfilAlert mb-lg-0 mt-lg-2 ml-lg-3" id="imagenAlert" style="display: none;">nombre mal</p>
                     <input type="file" name="fileImagenes[]" id="multimedia"
                         class="input-multimedia" accept="image/*"
                         style="width: 70%" multiple>
@@ -63,6 +66,7 @@
 
                 <div>
                     <label for="multimedia-v"><h1>Video</h1></label>
+                    <p class="perfilAlert mb-lg-0 mt-lg-2 ml-lg-3" id="videoAlert" style="display: none;">nombre mal</p>
                     <input type="file" name="video" id="multimedia-v"
                         class="input-multimedia" accept="video/*"
                         style="width: 70%">
@@ -79,7 +83,7 @@
                 <input type="text" value="{{Auth::user()->id}}" name="autor" hidden>
                 <input type="text" value="1" name="esNoticia" hidden>
                 <div class="text-center ">
-                    <input class="mb-2 btn btn-submit" type="submit" value="Publicar" id="terminarNota">
+                    <input class="mb-2 btn btn-submit" type="submit" value="Publicar" id="guardarNota">
                     <!--<input class="mb-2 btn btn-submit" type="submit" value="Guardar" id="guardarNota">-->
                 </div>
             </form>
@@ -120,7 +124,7 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
             }
-            toastr.success('Noticia guardada, revise su perfil');
+            toastr.success('Publicacion guardada, revise su perfil');
         });
 
     </script>

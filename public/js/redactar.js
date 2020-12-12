@@ -17,13 +17,6 @@ $(document).ready(function(){
         clone22 = $(this).clone();
         readURL(this, imagen);
         valImagen = true;
-
-
-    });
-
-    $("#multimedia-v").change(function(){
-        valVideo = true;
-
     });
 
     function sliderInit(){
@@ -84,6 +77,80 @@ $(document).ready(function(){
         $("#contador").html(imagen);
         $('.img-carousel').slick("unslick");
         sliderInit();
+    });
+
+    Date.prototype.toDateInputValue = (function() {
+        var local = new Date(this);
+        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+        return local.toJSON().slice(0,10);
+    });
+    $('#pFecha').val(new Date().toDateInputValue());
+
+    $('#guardarNota').click(function (e) {
+        e.preventDefault();
+
+        $("#tituloAlert").hide();
+        $("#descripcionAlert").hide();
+        $("#contenidoAlert").hide();
+        $("#imagenAlert").hide();
+        $("#videoAlert").hide();
+
+        $("input[name='estado']").val(1);
+        var valid=true;
+        var titulo = $("[name='titulo']").val();
+        if(titulo==""){
+            valid = false;
+            $("#tituloAlert").text("Ingrese un título, por favor");
+            $("#tituloAlert").show();
+        }
+        var descripcion = $("[name='descripcion']").val();
+        if(descripcion==""){
+            valid = false;
+            $("#descripcionAlert").text("Ingrese una descripción, por favor");
+            $("#descripcionAlert").show();
+        }
+        var contenido = tinymce.get("noticia-contenido").getContent();
+        console.log(contenido);
+        if(contenido==""){
+            valid = false;
+            $("#contenidoAlert").text("Ingrese el contenido de la nota, por favor");
+            $("#contenidoAlert").show();
+        }
+        var contImagenes = $('#contador').text();
+        console.log(contImagenes);
+        if(contImagenes=="0"||contImagenes=="###"){
+            valid = false;
+            $("#imagenAlert").text("Ingrese al menos una imagen, por favor");
+            $("#imagenAlert").show();
+        }
+        var video = $('#video_here').attr('src');
+        if(video==""){
+            valid = false;
+            $("#videoAlert").text("Ingrese un video, por favor");
+            $("#videoAlert").show();
+        }
+        if(valid){
+            $('#redactarNoticia').submit();
+        }else{
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+                }
+            toastr.error('Llene todos los campos');
+        }
     });
 
 });
